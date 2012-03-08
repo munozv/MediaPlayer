@@ -8,5 +8,7 @@
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
 
-	<Grid x:Name="LayoutRoot"/>
+	<Grid x:Name="LayoutRoot">
+		<Image HorizontalAlignment="Left" Height="22" Source="icons.gif" Stretch="Fill" VerticalAlignment="Top" Width="18"/>
+	</Grid>
 </UserControl>

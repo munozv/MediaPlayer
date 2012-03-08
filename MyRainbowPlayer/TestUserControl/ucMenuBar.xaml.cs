@@ -36,7 +36,7 @@ namespace TestUserControl
                 // ResizeMode = NoResize defuck ?
 				};
 				var bc = new BrushConverter();
-				window.Background = (Brush)bc.ConvertFrom("#FF9EDBF8");
+				//window.Background = (Brush)bc.ConvertFrom("#FF9EDBF8");
                 window.ShowDialog();
 		}
 
@@ -63,6 +63,21 @@ namespace TestUserControl
 		private void LoopButtonClick(object sender, System.Windows.RoutedEventArgs e)
 		{
 			// TODO: Add event handler implementation here.
+		}
+
+		private void AboutMLPClick(object sender, System.Windows.RoutedEventArgs e)
+		{
+				Window window = new Window 
+   			    {
+                Title = "About My Little (Pony) Player",
+                Content = new AboutUs(),
+				Height = 400,
+				Width = 435
+                // ResizeMode = NoResize defuck ?
+				};
+				var bc = new BrushConverter();
+				window.Background = (Brush)bc.ConvertFrom("#FF9EDBF8");
+                window.ShowDialog();
 		}
 	}
 }

@@ -29,7 +29,7 @@
 				<MenuItem x:Name="LoopButton" Header="Loop" Background="#FFBED3EB" Click="LoopButtonClick"/>
 			</MenuItem>
 			<MenuItem x:Name="Help" Header="Help">
-				<MenuItem Header="About MyLittlePlayer" Background="#FFBED3EB"/>
+				<MenuItem x:Name="About" Header="About MyLittlePlayer" Background="#FFBED3EB" Click="AboutMLPClick"/>
 			</MenuItem>
 		</Menu>
 	</Grid>

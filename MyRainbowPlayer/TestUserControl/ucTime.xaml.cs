@@ -46,5 +46,15 @@ namespace TestUserControl
 		{
 			// TODO: Add event handler implementation here.
 		}
+
+		private void ButtonRepeatClick(object sender, System.Windows.RoutedEventArgs e)
+		{
+			// TODO: Add event handler implementation here.
+		}
+
+		private void ButtonShuffleClick(object sender, System.Windows.RoutedEventArgs e)
+		{
+			// TODO: Add event handler implementation here.
+		}
 	}
 }

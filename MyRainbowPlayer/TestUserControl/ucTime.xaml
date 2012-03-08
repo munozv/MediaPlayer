@@ -182,7 +182,7 @@
 		</LinearGradientBrush>
 	</Slider.BorderBrush>
 </Slider>
-<Button x:Name="buttonPrev_Copy" Content="Shuffle" HorizontalAlignment="Left" Margin="119.473,0,0,44.163" Width="59.64" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" Height="20.675" VerticalAlignment="Bottom" BorderBrush="White" Click="ButtonPrevClick">
+<Button x:Name="ShuffleButton" Content="Shuffle" HorizontalAlignment="Left" Margin="119.473,0,0,44.163" Width="59.64" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" Height="20.675" VerticalAlignment="Bottom" BorderBrush="White" Click="ButtonShuffleClick">
 	<Button.RenderTransform>
 		<TransformGroup>
 			<ScaleTransform/>
@@ -195,7 +195,7 @@
 		<SolidColorBrush Color="#FFBED3EB" Opacity="0.23"/>
 	</Button.Background>
 </Button>
-<Button x:Name="buttonPrev_Copy1" Content="Repeat" HorizontalAlignment="Left" Margin="119.056,0,0,15.83" Width="59.64" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Click="ButtonPrevClick" Height="20.675" VerticalAlignment="Bottom">
+<Button x:Name="RepeatButton" Content="Repeat" HorizontalAlignment="Left" Margin="119.056,0,0,15.83" Width="59.64" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Click="ButtonRepeatClick" Height="20.675" VerticalAlignment="Bottom">
 	<Button.RenderTransform>
 		<TransformGroup>
 			<ScaleTransform/>

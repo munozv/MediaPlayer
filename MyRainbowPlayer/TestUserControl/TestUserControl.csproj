@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutUs.xaml.cs">
+      <DependentUpon>AboutUs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="button.xaml.cs">
       <DependentUpon>button.xaml</DependentUpon>
     </Compile>
@@ -86,6 +89,10 @@
     <Compile Include="ucTime.xaml.cs">
       <DependentUpon>ucTime.xaml</DependentUpon>
     </Compile>
+    <Page Include="AboutUs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
