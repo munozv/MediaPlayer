@@ -36,7 +36,7 @@ namespace TestUserControl
                 // ResizeMode = NoResize defuck ?
 				};
 				var bc = new BrushConverter();
-				//window.Background = (Brush)bc.ConvertFrom("#FF9EDBF8");
+				window.Background = (Brush)bc.ConvertFrom("#FF9EDBF8");
                 window.ShowDialog();
 		}
 

@@ -1,0 +1,11 @@
+AboutUs.xaml 		:apparait quand clique dans le menu (ucMenuBar.xaml : Help > About)
+ucNewPlaylist.xaml 	:apparait quand clique dans le menu (ucMenuBar.xaml : File > Create Playlist)
+MediaSlider.xaml 	:Le slider pour la musique/video et skip / changer le cours de la video/music
+MainWindows.xaml 	:Windows de base, split en haut pour le ucMenuBar.xaml, a gauche pour le ucPlaylist.xaml
+					 en bas pour le ucTime.xaml, et a droite ca change selon la selection:
+					
+					
+MusicPreview.xaml 	    - Quand C est pour visualier la liste des musique/video
+PicturePreview.xaml	    - Quand C est pour visualier la liste des images
+MediaVideoPlayer.xaml   - Quand C est une video qui est en train d etre regardee
+MediaPicturePlayer.xaml	- Quand C est une image qui est visualise : MediaPicturePlayer.xaml
