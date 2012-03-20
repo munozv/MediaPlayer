@@ -1,0 +1,20 @@
+﻿TestUserControl
+
+
+exe
+C#
+.cs
+C:\Users\bideau_s\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\obj\Debug\
+TestUserControl
+none
+false
+DEBUG;TRACE
+C:\Users\bideau_s\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\View\App.xaml
+15293086302
+1-1076236598
+22-546860493
+171023912230
+View\AboutUs.xaml;View\button.xaml;View\VideoPreview.xaml;View\ucFullscreen.xaml;View\MainWindow.xaml;View\MediaPicturePlayer.xaml;View\MediaSlider.xaml;View\MediaVideoPlayer.xaml;View\MusicPreview.xaml;View\PicturePreview.xaml;View\Simple Styles.xaml;View\ucMenuBar.xaml;View\ucNewPlaylist.xaml;View\ucPlaylist.xaml;View\ucTime.xaml;
+
+False
+

@@ -1,0 +1,15 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+	xmlns:local="clr-namespace:TestUserControl"
+	mc:Ignorable="d"
+	x:Class="TestUserControl.ucFullscreen"
+	x:Name="UserControl" Width="805" Height="805">
+
+        <Grid x:Name="myGrid" Height="610" Width="635">
+        <local:ucTime x:Name="Timer" Margin="-9,118,0,0" Width="631.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="197.721" Loaded="Timer_Loaded" />
+    </Grid>
+</UserControl>

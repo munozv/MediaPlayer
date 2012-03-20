@@ -1,20 +1,20 @@
 ﻿TestUserControl
 
 
-winexe
+exe
 C#
 .cs
-C:\Users\Nsy\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\obj\Debug\
+C:\Users\bideau_s\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\obj\Debug\
 TestUserControl
 none
 false
 DEBUG;TRACE
-C:\Users\Nsy\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\App.xaml
-131233074706
+C:\Users\bideau_s\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\View\App.xaml
+15293086302
 1-1076236598
-15-1640167027
-15271281029
-AboutUs.xaml;button.xaml;MainWindow.xaml;MediaPicturePlayer.xaml;MediaSlider.xaml;MediaVideoPlayer.xaml;MusicPreview.xaml;PicturePreview.xaml;Simple Styles.xaml;ucMenuBar.xaml;ucNewPlaylist.xaml;ucPlaylist.xaml;ucTime.xaml;
+23-1934316956
+171023912230
+View\AboutUs.xaml;View\button.xaml;View\VideoPreview.xaml;View\ucFullscreen.xaml;View\MainWindow.xaml;View\MediaPicturePlayer.xaml;View\MediaSlider.xaml;View\MediaVideoPlayer.xaml;View\MusicPreview.xaml;View\PicturePreview.xaml;View\Simple Styles.xaml;View\ucMenuBar.xaml;View\ucNewPlaylist.xaml;View\ucPlaylist.xaml;View\ucTime.xaml;
 
 True
 

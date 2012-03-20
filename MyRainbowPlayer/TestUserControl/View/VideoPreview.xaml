@@ -1,0 +1,22 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:TestUserControl"
+	mc:Ignorable="d"
+	x:Class="TestUserControl.VideoPreview"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot" Opacity="0.595">
+		<DataGrid FontFamily="Lucida Console" Grid.Column="1">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Title" Foreground="#FF2F0B0B"/>
+				<DataGridTextColumn Header="Time"/>
+                <DataGridTextColumn Header="Year"/>
+                <DataGridTextColumn Header="Genre"/>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

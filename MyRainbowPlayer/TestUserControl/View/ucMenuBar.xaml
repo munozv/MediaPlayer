@@ -1,0 +1,36 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ec="http://schemas.microsoft.com/expression/2010/controls"
+	mc:Ignorable="d"
+	x:Class="TestUserControl.ucMenuBar"
+	x:Name="UserControl" Height="22" Width="639">
+
+	<Grid x:Name="LayoutRoot">
+		<Rectangle Margin="0,2,0,0" Stroke="Black" StrokeThickness="0">
+			<Rectangle.Fill>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="White"/>
+					<GradientStop Color="#FFBED3EB" Offset="0.517"/>
+				</LinearGradientBrush>
+			</Rectangle.Fill>
+		</Rectangle>
+		<Menu x:Name="Menu" FontFamily="Lucida Console" Height="20" VerticalAlignment="Top" Margin="8,2,8,0" Background="{x:Null}" Foreground="Black">
+			<MenuItem x:Name="File" Header="File" Background="{x:Null}" Click="OpenNewFile">
+				<MenuItem x:Name="Open" Header="Open" Background="#FFBED3EB" Click="OpenNewFile"/>
+				<MenuItem x:Name="CreatePlaylist" Header="Create Playlist" Background="#FFBED3EB" Click="CreateaPlaylist"/>
+			</MenuItem>
+			<MenuItem x:Name="Play" Header="Play">
+				<MenuItem x:Name="PlayAndPause" Header="Play / Pause" Background="#FFBED3EB" Click="PlayPauseClick"/>
+				<MenuItem x:Name="StopButton" Header="Stop" Background="#FFBED3EB" Click="StopButtonClick"/>
+				<MenuItem x:Name="ShuffleButton" Header="Shuffle" Background="#FFBED3EB" Click="ShuffleButtonClick"/>
+				<MenuItem x:Name="LoopButton" Header="Loop" Background="#FFBED3EB" Click="LoopButtonClick"/>
+			</MenuItem>
+			<MenuItem x:Name="Help" Header="Help">
+				<MenuItem x:Name="About" Header="About MyLittlePlayer" Background="#FFBED3EB" Click="AboutMLPClick"/>
+			</MenuItem>
+		</Menu>
+	</Grid>
+</UserControl>

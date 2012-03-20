@@ -1,0 +1,17 @@
+﻿<Application
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="TestUserControl.App"
+	StartupUri="MainWindow.xaml">
+	<Application.Resources>
+		<!-- Resources scoped at the Application level should be defined here. -->
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Simple Styles.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			<ControlTemplate x:Key="ButtonBlueBugged" TargetType="{x:Type Button}">
+				<Grid/>
+			</ControlTemplate>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

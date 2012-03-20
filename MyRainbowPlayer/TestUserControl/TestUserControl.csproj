@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{b3bd87db-f2ef-41ef-bfa5-acef775ed694}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{B3BD87DB-F2EF-41EF-BFA5-ACEF775ED694}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <DefaultClrNameSpace>TestUserControl</DefaultClrNameSpace>
     <RootNamespace>TestUserControl</RootNamespace>
@@ -36,11 +36,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Controls" />
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,100 +60,120 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AboutUs.xaml.cs">
+    <Compile Include="MediaClass.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\ucTimeModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AboutUs.xaml.cs">
       <DependentUpon>AboutUs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="button.xaml.cs">
+    <Compile Include="View\button.xaml.cs">
       <DependentUpon>button.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MediaPicturePlayer.xaml.cs">
+    <Compile Include="Model\DatabasePlaylist.cs" />
+    <Compile Include="View\VideoPreview.xaml.cs">
+      <DependentUpon>VideoPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\myMedia.cs" />
+    <Compile Include="View\ucFullscreen.xaml.cs">
+      <DependentUpon>ucFullscreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MediaPicturePlayer.xaml.cs">
       <DependentUpon>MediaPicturePlayer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MediaSlider.xaml.cs">
+    <Compile Include="View\MediaSlider.xaml.cs">
       <DependentUpon>MediaSlider.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MediaVideoPlayer.xaml.cs">
+    <Compile Include="View\MediaVideoPlayer.xaml.cs">
       <DependentUpon>MediaVideoPlayer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MusicPreview.xaml.cs">
+    <Compile Include="View\MusicPreview.xaml.cs">
       <DependentUpon>MusicPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PicturePreview.xaml.cs">
+    <Compile Include="View\PicturePreview.xaml.cs">
       <DependentUpon>PicturePreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucMenuBar.xaml.cs">
+    <Compile Include="View\ucMenuBar.xaml.cs">
       <DependentUpon>ucMenuBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucNewPlaylist.xaml.cs">
+    <Compile Include="View\ucNewPlaylist.xaml.cs">
       <DependentUpon>ucNewPlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucPlaylist.xaml.cs">
+    <Compile Include="View\ucPlaylist.xaml.cs">
       <DependentUpon>ucPlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ucTime.xaml.cs">
+    <Compile Include="View\ucTime.xaml.cs">
       <DependentUpon>ucTime.xaml</DependentUpon>
     </Compile>
-    <Page Include="AboutUs.xaml">
+    <Page Include="View\AboutUs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="button.xaml">
+    <Page Include="View\button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\VideoPreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Page Include="View\ucFullscreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MediaPicturePlayer.xaml">
+    <Page Include="View\MediaPicturePlayer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MediaSlider.xaml">
+    <Page Include="View\MediaSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MediaVideoPlayer.xaml">
+    <Page Include="View\MediaVideoPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MusicPreview.xaml">
+    <Page Include="View\MusicPreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PicturePreview.xaml">
+    <Page Include="View\PicturePreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Simple Styles.xaml">
+    <Page Include="View\Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ucMenuBar.xaml">
+    <Page Include="View\ucMenuBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ucNewPlaylist.xaml">
+    <Page Include="View\ucNewPlaylist.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ucPlaylist.xaml">
+    <Page Include="View\ucPlaylist.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ucTime.xaml">
+    <Page Include="View\ucTime.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -163,15 +188,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons.gif" />
-    <Resource Include="logoRainbow.png" />
-    <Resource Include="rainbowdashsleep.png" />
+    <Resource Include="View\icons.gif" />
+    <Resource Include="View\logoRainbow.png" />
+    <Resource Include="View\rainbowdashsleep.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="mlp.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath32)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	     Other similar extension points exist, see Microsoft.Common.targets.
