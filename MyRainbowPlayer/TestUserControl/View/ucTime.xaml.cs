@@ -20,7 +20,8 @@ namespace TestUserControl
 	{
 		public ucTime()
 		{
-			this.InitializeComponent();
+            this.InitializeComponent();
+           this.DataContext = new ucTimeModel();
 		}
      /*   public ucTime(ucTimeModel m)
         {

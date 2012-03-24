@@ -13,8 +13,7 @@ namespace TestUserControl
         public bool mediaLoaded;
         public bool pause;
         private bool fullScreen = false;
-        //public String Name;
-        public string PlayText;
+        public bool isPlay;
 
         private ICommand playCommand;
         private ICommand stopCommand;
@@ -24,9 +23,26 @@ namespace TestUserControl
         private ICommand nextCommand;
         private MediaElement medElem;
 
+        string _TextPlay;
+
+        public string TextPlay
+        {
+            get { return _TextPlay; }
+            protected set
+            {
+                _TextPlay = value;
+                OnPropertyChanged("TextPlay");
+            }
+        }
+
+
         public ucTimeModel()
         {
-
+            chemin = "";
+            mediaLoaded = false;
+            pause = false;
+            isPlay = false;
+            TextPlay = "|>";
         }
         public ucTimeModel(MediaElement medelem)
         {
@@ -34,8 +50,8 @@ namespace TestUserControl
             mediaLoaded = false;
             pause = false;
             medElem = medelem;
-            PlayText = "Play";
-            //OnPropertyChanged("PlayText");
+            isPlay = false;
+            TextPlay = "|>";
         }
 
         public ICommand PlayCommand
@@ -112,15 +128,15 @@ namespace TestUserControl
                 if (pause == true)
                 {
                     medElem.Play();
-                    PlayText = "Pause";
-                    OnPropertyChanged("PlayText");
+                    isPlay = false;
+                    TextPlay = "||";
                     pause = false;
                 }
                 else
                 {
                     medElem.Pause();
-                    PlayText = "Play";
-                    OnPropertyChanged("PlayText");
+                    isPlay = true;
+                    TextPlay = "|>";
                     pause = true;
                 }
             }

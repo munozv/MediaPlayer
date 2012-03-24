@@ -129,7 +129,7 @@
                     <SolidColorBrush Color="#FFBED3EB" Opacity="0.23"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="buttonPlay"  Command="{Binding PlayCommand}" Content="|> ||"  HorizontalAlignment="Left" Margin="163.5,55.5,0,0" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Top" Click="ButtonPlayClick">
+        <Button x:Name="buttonPlay"  Command="{Binding PlayCommand}" Content="{Binding Path=TextPlay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="163.5,55.5,0,0" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Top" Click="ButtonPlayClick">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

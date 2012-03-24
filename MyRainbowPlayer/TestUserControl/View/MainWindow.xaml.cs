@@ -22,15 +22,16 @@ namespace TestUserControl
         public bool mediaLoaded;
         public bool pause;
         private bool fullScreen = false;
-        ucTimeModel timemodel;
 	
         public MainWindow()
 		{
 			this.InitializeComponent();
 
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-            timemodel = new ucTimeModel(medElem);
- //           this.Timer.DataContext = timemodel;
+            this.Timer.DataContext = new ucTimeModel(medElem);
+            this.SliderForMedia.DataContext = new ucMediaSliderModel(medElem);
+            this.MenuBar.DataContext = new ucMenuBarModel(medElem);
+            this.PlayList.DataContext = new ucPlaylistModel(medElem);
             /*
             this.Timer.buttonPlay.Click += new RoutedEventHandler(Timer_Play);
             this.MenuBar.Open.Click += new RoutedEventHandler(MenuBar_Clicked);
