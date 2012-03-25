@@ -8,6 +8,7 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Simple Styles.xaml"/>
+				<ResourceDictionary Source="/TestUserControl;component/Simple Styles.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<ControlTemplate x:Key="ButtonBlueBugged" TargetType="{x:Type Button}">
 				<Grid/>

@@ -6,42 +6,21 @@
 	x:Class="TestUserControl.MainWindow"
 	x:Name="Window"
    
-	Title="MyLittlePlayer" Background="#FFC5D4EB" ResizeMode="NoResize" Cursor="Arrow" Visibility="Visible" Width="931" Height="583.221" Icon="icons.gif">
-	<Grid x:Name="myGrid">
-		<Grid.RowDefinitions>
+	Title="MyLittlePlayer" Background="#FFC5D4EB" ResizeMode="CanResize" Cursor="Arrow" Visibility="Visible" Width="695" Height="593.221" Icon="icons.gif">
+	<Grid x:Name="myGrid" Margin="0,0,2,0">      
+            <Grid.RowDefinitions>
 			<RowDefinition Height="20.8"/>
-			<RowDefinition Height="547.421"/>
+			<RowDefinition Height="544.421"/>
 		</Grid.RowDefinitions>
-        <local:ucMenuBar x:Name="MenuBar" Width="Auto" VerticalAlignment="Top"/>
-		<Grid Grid.Row="1" Margin="8,0,-8,0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="0.211*"/>
-				<ColumnDefinition Width="0.789*"/>
-			</Grid.ColumnDefinitions>
-			<local:ucPlaylist x:Name="PlayList" Margin="4,8,0,8" Height="Auto" Width="Auto" HorizontalAlignment="Left" Loaded="PlayList_Loaded" />
-			<Grid Grid.Column="1" x:Name="gridroot" >
-				<Grid.RowDefinitions>
-					<RowDefinition Height="360.2"/>
-					<RowDefinition Height="24.667"/>
-					<RowDefinition/>
-				</Grid.RowDefinitions>
-				<!--
-				many previews: 1)Picture, 2)Music, 3)Video (idem que musique avec differentes info)
-				<local:PicturePreview x:Name="PicturePreview" Height="Auto" Width="675.17" Margin="0,8,17,8"/>
-				<local:MusicPreview x:Name="MusicPreview" Height="Auto" Width="675.17" Margin="18.827,8,35.827,6" d:LayoutOverrides="HorizontalMargin"/>
-	            <local:MusicPreview x:Name="MusicPreview" Height="Auto" Width="675.17" Margin="18.827,8,35.827,6" d:LayoutOverrides="HorizontalMargin"/>
-				<local:MediaVideoPlayer x:Name="MediaVideoPlayer" Height="Auto" Width="675.17"></local:MediaVideoPlayer>
-
-				other: 4)Video, 5)playlist (void comment representer)
-				-->
-				<local:MusicPreview x:Name="MusicPreview" Height="Auto" Width="675.17" Margin="18.827,8,35.827,6" d:LayoutOverrides="HorizontalMargin"/>
-
-				<local:MediaSlider x:Name="SliderForMedia" Margin="18.828,-6,35.827,4.667" Grid.Row="1"/>
-				<local:ucTime x:Name="Timer" Grid.Row="1" Margin="39.945,-20.5,0,0" Width="631.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="197.721" Grid.RowSpan="2"/>
-                <MediaElement x:Name="medElem" LoadedBehavior="Manual" Margin="19,8,36,6" />
-            </Grid>
-		</Grid>
-	</Grid>
+      		<TabControl Margin="8,4,0,8" Style="{DynamicResource SimpleTabControl}" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Center" Width="666" Grid.RowSpan="2">
+				<TabItem Header="Player" Style="{DynamicResource SimpleTabItem}">
+					<local:ucTime x:Name="Timer" Margin="8,0,0,-1" Width="679" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="180.221" Grid.Row="1" d:LayoutOverrides="VerticalAlignment"/> 
+				</TabItem>
+				<TabItem Header="Bibliotheque" Style="{DynamicResource SimpleTabItem}" >
+					<local:ucPlaylist x:Name="Playlist" Width="Auto" Height="Auto" Margin="0,0,0,0"  />
+				</TabItem>
+			</TabControl>
+				</Grid>
 
 
 

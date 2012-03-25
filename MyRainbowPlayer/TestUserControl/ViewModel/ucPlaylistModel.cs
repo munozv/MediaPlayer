@@ -6,19 +6,17 @@ using System.Windows.Controls;
 
 namespace TestUserControl
 {
-    public class ucPlaylistModel
+    public class ucPlaylistModel : ViewModelBase
     {
-        public MediaElement medelem;
+        public DatabasePlaylist db;
 
+        public ucPlaylistModel(DatabasePlaylist ddb)
+        {
+            db = ddb;
+        }
         public ucPlaylistModel()
         {
-
+            db = null;
         }
-
-        public ucPlaylistModel(MediaElement medel)
-        {
-            medelem = medel;
-        }
-
     }
 }

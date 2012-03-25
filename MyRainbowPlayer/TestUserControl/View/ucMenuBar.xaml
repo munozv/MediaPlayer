@@ -20,6 +20,7 @@
 		<Menu x:Name="Menu" FontFamily="Lucida Console" Height="20" VerticalAlignment="Top" Margin="8,2,8,0" Background="{x:Null}" Foreground="Black">
 			<MenuItem x:Name="File" Header="File" Background="{x:Null}" Click="OpenNewFile">
 				<MenuItem x:Name="Open" Header="Open" Background="#FFBED3EB" Click="OpenNewFile"/>
+                <MenuItem x:Name="AddinPlaylist" Header="Add in Playlist" Background="#FFBED3EB" Command="{Binding AddInCommand}"/>
 				<MenuItem x:Name="CreatePlaylist" Header="Create Playlist" Background="#FFBED3EB" Click="CreateaPlaylist"/>
 			</MenuItem>
 			<MenuItem x:Name="Play" Header="Play">

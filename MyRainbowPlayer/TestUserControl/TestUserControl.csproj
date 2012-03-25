@@ -6,7 +6,7 @@
     <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B3BD87DB-F2EF-41EF-BFA5-ACEF775ED694}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <DefaultClrNameSpace>TestUserControl</DefaultClrNameSpace>
     <RootNamespace>TestUserControl</RootNamespace>
@@ -65,8 +65,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MediaClass.cs" />
+    <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\ucMediaSliderModel.cs" />
     <Compile Include="ViewModel\ucMenuBarModel.cs" />
     <Compile Include="ViewModel\ucPlaylistModel.cs" />
     <Compile Include="ViewModel\ucTimeModel.cs" />
@@ -78,27 +78,9 @@
       <DependentUpon>button.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DatabasePlaylist.cs" />
-    <Compile Include="View\VideoPreview.xaml.cs">
-      <DependentUpon>VideoPreview.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\myMedia.cs" />
     <Compile Include="View\ucFullscreen.xaml.cs">
       <DependentUpon>ucFullscreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MediaPicturePlayer.xaml.cs">
-      <DependentUpon>MediaPicturePlayer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MediaSlider.xaml.cs">
-      <DependentUpon>MediaSlider.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MediaVideoPlayer.xaml.cs">
-      <DependentUpon>MediaVideoPlayer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MusicPreview.xaml.cs">
-      <DependentUpon>MusicPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PicturePreview.xaml.cs">
-      <DependentUpon>PicturePreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ucMenuBar.xaml.cs">
       <DependentUpon>ucMenuBar.xaml</DependentUpon>
@@ -112,15 +94,15 @@
     <Compile Include="View\ucTime.xaml.cs">
       <DependentUpon>ucTime.xaml</DependentUpon>
     </Compile>
+    <Page Include="Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\AboutUs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\button.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\VideoPreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -140,26 +122,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\MediaPicturePlayer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\MediaSlider.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\MediaVideoPlayer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\MusicPreview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\PicturePreview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

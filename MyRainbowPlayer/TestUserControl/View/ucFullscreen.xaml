@@ -8,8 +8,5 @@
 	mc:Ignorable="d"
 	x:Class="TestUserControl.ucFullscreen"
 	x:Name="UserControl" Width="805" Height="805">
-
-        <Grid x:Name="myGrid" Height="610" Width="635">
-        <local:ucTime x:Name="Timer" Margin="-9,118,0,0" Width="631.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="197.721" Loaded="Timer_Loaded" />
-    </Grid>
+            <local:ucTime x:Name="Timer" Margin="0,412.279,0,0" Width="631.667" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="197.721" Loaded="Timer_Loaded" />
 </UserControl>

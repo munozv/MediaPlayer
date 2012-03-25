@@ -21,6 +21,7 @@ namespace TestUserControl
         public String chemin;
         public bool mediaLoaded;
         public bool pause;
+        DatabasePlaylist db;
         private bool fullScreen = false;
 	
         public MainWindow()
@@ -28,10 +29,8 @@ namespace TestUserControl
 			this.InitializeComponent();
 
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-            this.Timer.DataContext = new ucTimeModel(medElem);
-            this.SliderForMedia.DataContext = new ucMediaSliderModel(medElem);
-            this.MenuBar.DataContext = new ucMenuBarModel(medElem);
-            this.PlayList.DataContext = new ucPlaylistModel(medElem);
+            this.Timer.DataContext = new ucTimeModel(db);
+            this.Playlist.DataContext = new ucPlaylistModel(db);
             /*
             this.Timer.buttonPlay.Click += new RoutedEventHandler(Timer_Play);
             this.MenuBar.Open.Click += new RoutedEventHandler(MenuBar_Clicked);
@@ -62,6 +61,7 @@ namespace TestUserControl
             */
         }
 
+       
         private void PlayList_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -83,7 +83,7 @@ namespace TestUserControl
             {
                 chemin = fenetre.FileName;
                 Console.WriteLine(chemin);
-                medElem.Source = new Uri(chemin);
+                //medElem.Source = new Uri(chemin);
                 mediaLoaded = true;
                 pause = true;
             }

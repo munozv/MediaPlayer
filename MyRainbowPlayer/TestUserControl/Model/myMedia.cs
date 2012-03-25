@@ -21,7 +21,7 @@ namespace TestUserControl
         public eMediaType type { get; set; }
     }
 
-    class myPicture : AMedia
+    public class myPicture : AMedia
     {
         public DateTime date;
 
@@ -30,7 +30,7 @@ namespace TestUserControl
             this.type = eMediaType.PICTURE;
         }
     }
-    class myVideo : AMedia
+    public class myVideo : AMedia
     {
         public DateTime time { get; set; }
         public uint year { get; set; }
@@ -42,7 +42,7 @@ namespace TestUserControl
         }
     }
 
-    class mySound : AMedia
+    public class mySound : AMedia
     {
         public String artist { get; set; }
         public String album { get; set; }
