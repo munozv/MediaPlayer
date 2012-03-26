@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Mp3Tags
+namespace Tags
 {
-    class Tags
+    class Mp3Tag
     {
         public const int    TagsDataSize   = 128;
         public const int    MagicSize      = 3;
@@ -189,13 +189,13 @@ namespace Mp3Tags
             Dic.Add(147, "Synthpop");
         }
 
-        public                  Tags(string file)
+        public                  Mp3Tag(string file)
         {
             this.Init();
             this.FileName = file;
         }
 
-        public                  Tags()
+        public                  Mp3Tag()
         {
             this.Init();
         }
@@ -267,10 +267,11 @@ namespace Mp3Tags
                 }
                 return (false);
             }
-            catch (FileNotFoundException) {
+            catch (FileNotFoundException)
+            {
                 return (false);
             }
-            return (false);
+            return false;
         }
 
     }

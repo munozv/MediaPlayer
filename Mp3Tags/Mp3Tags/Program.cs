@@ -3,11 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Mp3Tags
+namespace Tags
 {
     class Program
     {
-        static private void PrintInfo(Tags tag)
+        static private void PrintInfo(JPGTag tag)
+        {
+            Console.WriteLine("========= Picture =========");
+            Console.WriteLine("Width:     " + tag.ImageWidth);
+            Console.WriteLine("Height:    " + tag.ImageHeight);
+            Console.WriteLine("Artist:    " + tag.ImageArtist);
+            Console.WriteLine("Title:     " + tag.ImageTitle);
+            Console.WriteLine("Copyright: " + tag.Copyright);
+            Console.WriteLine("Date:      " + tag.ImageDate);
+        }
+
+        static private void PrintInfo(Mp3Tag tag)
         {
             Console.WriteLine("========= " + tag.FileName + " =========");
             Console.WriteLine("Title:   " + tag.Title);
@@ -22,24 +33,27 @@ namespace Mp3Tags
 
         static void Main(string[] args)
         {
-            Tags.InitTags();
-            Tags MusicTag = new Tags("../../audio.mp3");
-            Tags MusicTag2 = new Tags("../../audio3.mp3");
-            Tags MusicTag3 = new Tags("fileThatDontExist");
-
+            /*
+             *   MUSIC 
+             */
+            Mp3Tag.InitTags();
+            Mp3Tag MusicTag = new Mp3Tag("../../audio.mp3");
+            Mp3Tag MusicTag2 = new Mp3Tag("../../audio3.mp3");
 
             if (MusicTag.ReadData())
                 PrintInfo(MusicTag);
-            else
-                Console.WriteLine("Error With file " + MusicTag.FileName);
             if (MusicTag2.ReadData())
                 PrintInfo(MusicTag2);
-            else
-                Console.WriteLine("Error With file " + MusicTag2.FileName);
-            if (MusicTag3.ReadData())
-                PrintInfo(MusicTag3);
-            else
-                Console.WriteLine("Error With file " + MusicTag3.FileName);
+            /*
+             *   PICTURE
+             */
+            JPGTag PicTag = new JPGTag("../../picture.jpg");
+            JPGTag PicTag2 = new JPGTag("../../lol.jpg");
+
+            if (PicTag.ReadData())
+                PrintInfo(PicTag);
+            if (PicTag.ReadData())
+                PrintInfo(PicTag2);
         }
     }
 }
