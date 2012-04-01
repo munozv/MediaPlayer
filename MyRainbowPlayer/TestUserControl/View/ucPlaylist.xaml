@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 	mc:Ignorable="d"
 	x:Class="TestUserControl.ucPlaylist"
 	x:Name="UserControl" Width="496" Height="277">
@@ -51,10 +52,16 @@
 			</Rectangle.Fill>
 		</Rectangle>
 		<TreeView x:Name="Playlist" Opacity="0.79" FontFamily="Lucida Console" HorizontalAlignment="Right" Width="200" d:LayoutOverrides="VerticalAlignment" BorderThickness="0" Background="{x:Null}" Margin="0,22,0,0">
-			<TreeViewItem x:Name="itemPlaylist" Header="Playlist" IsExpanded="True" Background="#00000000" GotFocus="PlaylistFocus">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged">
+                        <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Playlist, Path=SelectedItem}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <TreeViewItem x:Name="itemPlaylist" Header="Playlist" IsExpanded="True" Background="#00000000" GotFocus="PlaylistFocus">
 				<TreeViewItem Header="Default Playlist"  />
 			</TreeViewItem>
-			<TreeViewItem x:Name="itemMusics" Header="Musics" IsExpanded="True" GotFocus="MusicsFocus">
+                <TreeViewItem x:Name="itemMusics" Header="Musics" IsExpanded="True">
 				<TreeViewItem Header="Artist" GotFocus="ArtistFocus"/>
 				<TreeViewItem Header="Album" GotFocus="AlbumFocus"/>
 				<TreeViewItem Header="Genre" GotFocus="GenreFocus"/>
@@ -64,15 +71,21 @@
 		</TreeView>
 		
 	</Grid>
-	<DataGrid FontFamily="Lucida Console" Margin="200,20,0,0" d:LayoutOverrides="GridBox">
-			<DataGrid.Columns>
+	<DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0" d:LayoutOverrides="GridBox">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Datagrid, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <DataGrid.Columns>
 				<DataGridTextColumn Header="Title" Foreground="#FF2F0B0B"/>
 				<DataGridTextColumn Header="Time"/>
                 <DataGridTextColumn Header="Year"/>
                 <DataGridTextColumn Header="Genre"/>
 			</DataGrid.Columns>
 		</DataGrid>
-		<Grid x:Name="menu" Height="118" VerticalAlignment="Top">
+		<Grid x:Name="menu" Height="23" VerticalAlignment="Top">
 		<Rectangle Stroke="Black" StrokeThickness="0" Margin="0,0,0,0" Height="22" VerticalAlignment="Top">
 			<Rectangle.Fill>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

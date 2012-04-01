@@ -59,10 +59,5 @@ namespace TestUserControl
 			// TODO: Add event handler implementation here.
 		}
 
-        private void itemPlaylist_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
 	}
 }
