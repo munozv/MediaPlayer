@@ -71,18 +71,16 @@
 		</TreeView>
 		
 	</Grid>
-	<DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0" d:LayoutOverrides="GridBox">
+        <DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0"   ItemsSource="{Binding soundList}"  d:LayoutOverrides="GridBox" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
-                    <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Datagrid, Path=SelectedItem}"/>
+                    <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Datagrid, Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
             <DataGrid.Columns>
-				<DataGridTextColumn Header="Title" Foreground="#FF2F0B0B"/>
-				<DataGridTextColumn Header="Time"/>
-                <DataGridTextColumn Header="Year"/>
-                <DataGridTextColumn Header="Genre"/>
+                <DataGridTextColumn Header="name" Binding="{Binding name}"  Foreground="#FF2F0B0B"/>
+                <DataGridTextColumn Header="artist" Binding="{Binding artist}" />
 			</DataGrid.Columns>
 		</DataGrid>
 		<Grid x:Name="menu" Height="23" VerticalAlignment="Top">

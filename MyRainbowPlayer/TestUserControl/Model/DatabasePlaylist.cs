@@ -63,9 +63,9 @@ namespace TestUserControl
             mySound sound = new mySound();
 
             sound.path = path;
-            sound.name = "recupfrompath";
+            sound.Name = "recupfrompath";
             sound.genre = "rock";
-            sound.artist = "rocco";
+            sound.Artist = "rocco";
             // blablabla
 
             listSound.Add(sound);
@@ -79,7 +79,7 @@ namespace TestUserControl
             // gettage des infos depuis le path
             myVideo video = new myVideo();
 
-            video.name = "recupfrompath";
+            video.Name = "recupfrompath";
             video.genre = "action";
             // blablabla
 
@@ -90,7 +90,7 @@ namespace TestUserControl
             // gettage des infos depuis le path
             myPicture picture = new myPicture();
 
-            picture.name = "recupfrompath";
+            picture.Name = "recupfrompath";
             // blablabla
 
             ListPicture.Add(picture);

@@ -13,9 +13,19 @@ namespace TestUserControl
         NOTHING
     }
 
-    public abstract class AMedia
+    public abstract class AMedia : ViewModelBase
     {
-        public String name { get; set; }
+        private String name;
+        public String Name
+        {
+            get {return name;}
+            set
+            {
+                name = value;
+                OnPropertyChanged("name");
+            }
+        }
+
         public String path { get; set; }
         public uint kbsize { get; set; }
         public eMediaType type { get; set; }
@@ -44,7 +54,17 @@ namespace TestUserControl
 
     public class mySound : AMedia
     {
-        public String artist { get; set; }
+        private String artist;
+        public String Artist
+        {
+            get { return artist; }
+            set
+            {
+                artist = value;
+                OnPropertyChanged("artist");
+            }
+        }
+
         public String album { get; set; }
         public String genre { get; set; }
         public DateTime time { get; set; }
