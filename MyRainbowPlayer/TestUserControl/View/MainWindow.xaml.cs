@@ -27,17 +27,17 @@ namespace TestUserControl
         public MainWindow()
 		{
 			this.InitializeComponent();
-
-            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-            this.Timer.DataContext = new ucTimeModel(db);
-            this.Playlist.DataContext = new ucPlaylistModel(db);
-           /*db.addSound("tamaman");
+            db.addSound("tamaman");
             db.addSound("tapapa");
             db.addSound("tachien");
             db.addSound("tachat");
             db.addSound("tafrere");
-           db.SaveSoundB();*/
-            db.LoadSoundB();
+            db.SaveSoundB();
+            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+            this.Timer.DataContext = new ucTimeModel(db);
+            this.Playlist.DataContext = new ucPlaylistModel(db);
+           
+           // db.LoadSoundB();
             /*
             this.Timer.buttonPlay.Click += new RoutedEventHandler(Timer_Play);
             this.MenuBar.Open.Click += new RoutedEventHandler(MenuBar_Clicked);

@@ -29,7 +29,6 @@ namespace TestUserControl
                 OnPropertyChanged("soundList");
             }
         }
-        public List<mySound> listsound;
        public eMediaType _listdata;
         public eMediaType Listdata
         {
@@ -43,8 +42,17 @@ namespace TestUserControl
         public ucPlaylistModel(DatabasePlaylist ddb)
         {
             db = ddb;
+            mySound sound = new mySound();
+
+            sound.path = "test";
+            sound.Name = "recupfrompath";
+            sound.genre = "rock";
+            sound.Artist = "rocco";
+            db.ListSound.Add(sound);
+            // blablabla
             MusicsFocusCommand = new DelegateCommand(doListFocus, CanListFocus);
-          
+            Listdata = eMediaType.MUSIC;
+            soundList = new ObservableCollection<mySound>(db.ListSound);
         }
         public ucPlaylistModel()
         {
@@ -66,8 +74,9 @@ namespace TestUserControl
             TreeViewItem tv = param as TreeViewItem;
             if (tv.Header == "Musics")
             {
+                Console.WriteLine(param.ToString());
                 Listdata = eMediaType.MUSIC;
-                listsound = db.ListSound;
+                soundList = new ObservableCollection<mySound>(db.ListSound);
             }
             else if (tv.Header == "Pictures")
                 ;

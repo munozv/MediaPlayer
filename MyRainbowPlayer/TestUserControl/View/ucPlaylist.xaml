@@ -79,8 +79,7 @@
             </i:Interaction.Triggers>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="name" Binding="{Binding name}"  Foreground="#FF2F0B0B"/>
-                <DataGridTextColumn Header="artist" Binding="{Binding artist}" />
+              
 			</DataGrid.Columns>
 		</DataGrid>
 		<Grid x:Name="menu" Height="23" VerticalAlignment="Top">
