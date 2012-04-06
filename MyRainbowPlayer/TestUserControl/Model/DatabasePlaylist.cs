@@ -9,20 +9,20 @@ namespace TestUserControl
 {
     public class DatabasePlaylist
     {
-        private List<myPicture> listPicture;
-        public List<myPicture> ListPicture
+        private List<Media> listPicture;
+        public List<Media> ListPicture
         {
             get { return listPicture; }
             set { listPicture = value; }
         }
-        private List<mySound> listSound;
-        public List<mySound> ListSound
+        private List<Media> listSound;
+        public List<Media> ListSound
         {
             get { return listSound; }
             set { listSound = value; }
         }
-        private List<myVideo> listVideo;
-        public List<myVideo> ListVideo
+        private List<Media> listVideo;
+        public List<Media> ListVideo
         {
             get { return listVideo; }
             set { listVideo = value; }
@@ -30,14 +30,14 @@ namespace TestUserControl
 
         public DatabasePlaylist()
         {
-            ListPicture = new List<myPicture>();
-            listSound = new List<mySound>();
-            listVideo = new List<myVideo>();
+            ListPicture = new List<Media>();
+            listSound = new List<Media>();
+            listVideo = new List<Media>();
         }
 
         public void SaveSoundB()
         {
-            XmlSerializer xse = new XmlSerializer(typeof(List<mySound>));
+            XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
             FileStream fs = new FileStream("songs.xml", FileMode.Create);
 
             xse.Serialize(fs, ListSound);
@@ -46,9 +46,9 @@ namespace TestUserControl
         public void LoadSoundB()
         {
             int i = 0;
-            XmlSerializer xse = new XmlSerializer(typeof(List<mySound>));
+            XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
             FileStream fs = new FileStream("songs.xml", FileMode.Open);
-            listSound = (List<mySound>) xse.Deserialize(fs);
+            listSound = (List<Media>) xse.Deserialize(fs);
             
             while (i != listSound.Count())
             {
@@ -60,26 +60,26 @@ namespace TestUserControl
         public void addSound(String path)
         {
             // gettage des infos depuis le path
-            mySound sound = new mySound();
+            Media sound = new Media();
 
             sound.path = path;
-            sound.Name = "recupfrompath";
+            sound.name = "recupfrompath";
             sound.genre = "rock";
-            sound.Artist = "rocco";
+            sound.artist = "rocco";
             // blablabla
 
             listSound.Add(sound);
         }
-        public void deleteSound(mySound it)
+        public void deleteSound(Media it)
         {
             listSound.Remove(it);
         }
         public void addVideo(String path)
         {
             // gettage des infos depuis le path
-            myVideo video = new myVideo();
+            Media video = new Media();
 
-            video.Name = "recupfrompath";
+            video.name = "recupfrompath";
             video.genre = "action";
             // blablabla
 
@@ -88,9 +88,9 @@ namespace TestUserControl
         public void addPicture(String path)
         {
             // gettage des infos depuis le path
-            myPicture picture = new myPicture();
+            Media picture = new Media();
 
-            picture.Name = "recupfrompath";
+            picture.name = "recupfrompath";
             // blablabla
 
             ListPicture.Add(picture);

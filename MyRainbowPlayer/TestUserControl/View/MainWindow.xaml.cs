@@ -32,6 +32,9 @@ namespace TestUserControl
             db.addSound("tachien");
             db.addSound("tachat");
             db.addSound("tafrere");
+            db.addPicture("toncul");
+            db.addPicture("toncul");
+            db.addPicture("et toncul");
             db.SaveSoundB();
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
             this.Timer.DataContext = new ucTimeModel(db);

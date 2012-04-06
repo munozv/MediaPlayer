@@ -71,16 +71,15 @@
 		</TreeView>
 		
 	</Grid>
-        <DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0"   ItemsSource="{Binding soundList}"  d:LayoutOverrides="GridBox" >
+        <DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0"   ItemsSource="{Binding mediaList, UpdateSourceTrigger=PropertyChanged}"  d:LayoutOverrides="GridBox" IsReadOnly="True">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
-                    <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Datagrid, Path=SelectedItem}" />
+                    <i:InvokeCommandAction Command="{Binding fileFocus}" CommandParameter="{Binding ElementName=Tablesheet, Path=SelectedItem}" />
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
-
-            <DataGrid.Columns>
-              
-			</DataGrid.Columns>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OnMouseDoubleClick}" CommandParameter="{Binding ElementName=Tablesheet, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>   
 		</DataGrid>
 		<Grid x:Name="menu" Height="23" VerticalAlignment="Top">
 		<Rectangle Stroke="Black" StrokeThickness="0" Margin="0,0,0,0" Height="22" VerticalAlignment="Top">

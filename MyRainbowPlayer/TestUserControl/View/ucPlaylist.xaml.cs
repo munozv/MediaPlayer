@@ -20,8 +20,7 @@ namespace TestUserControl
 	{
 		public ucPlaylist()
 		{
-			this.InitializeComponent();
-          
+            this.InitializeComponent();
 		}
 
 		private void PlaylistFocus(object sender, System.Windows.RoutedEventArgs e)

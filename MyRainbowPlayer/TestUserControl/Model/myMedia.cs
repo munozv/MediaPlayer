@@ -13,25 +13,19 @@ namespace TestUserControl
         NOTHING
     }
 
-    public abstract class AMedia : ViewModelBase
+    public class Media : ViewModelBase
     {
-        private String name;
-        public String Name
-        {
-            get {return name;}
-            set
-            {
-                name = value;
-                OnPropertyChanged("name");
-            }
-        }
-
+        public String name { get; set; }
+        public String artist { get; set; }
+        public String album { get; set; }
+        public String genre { get; set; }
+        public DateTime time { get; set; }
         public String path { get; set; }
         public uint kbsize { get; set; }
         public eMediaType type { get; set; }
     }
 
-    public class myPicture : AMedia
+    public class myPicture : Media
     {
         public DateTime date;
 
@@ -40,7 +34,7 @@ namespace TestUserControl
             this.type = eMediaType.PICTURE;
         }
     }
-    public class myVideo : AMedia
+    public class myVideo : Media
     {
         public DateTime time { get; set; }
         public uint year { get; set; }
@@ -52,7 +46,7 @@ namespace TestUserControl
         }
     }
 
-    public class mySound : AMedia
+    public class mySound : Media
     {
         private String artist;
         public String Artist

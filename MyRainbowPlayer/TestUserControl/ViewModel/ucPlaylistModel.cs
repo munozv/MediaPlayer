@@ -10,7 +10,7 @@ namespace TestUserControl
 {
     public class ucPlaylistModel : ViewModelBase
     {
-        private ObservableCollection<mySound> p_list;
+       
         public enum eMediaType
         {
             PICTURES,
@@ -19,40 +19,31 @@ namespace TestUserControl
         }
 
         public DatabasePlaylist db;
-        public ObservableCollection<mySound> soundList
+        private ObservableCollection<Media> p_list;
+        public ObservableCollection<Media> mediaList
         {
             get { return p_list; }
-
             set
             {
                 p_list = value;
-                OnPropertyChanged("soundList");
+                OnPropertyChanged("mediaList");
             }
         }
-       public eMediaType _listdata;
-        public eMediaType Listdata
-        {
-            get { return _listdata; }
-            protected set
-            {
-                _listdata = value;
-                OnPropertyChanged("Listdata");
-            }
-        }
-        public ucPlaylistModel(DatabasePlaylist ddb)
+       public eMediaType Listdata;
+       public ucPlaylistModel(DatabasePlaylist ddb)
         {
             db = ddb;
-            mySound sound = new mySound();
+            Media sound = new Media();
 
             sound.path = "test";
-            sound.Name = "recupfrompath";
+            sound.name = "recupfrompath";
             sound.genre = "rock";
-            sound.Artist = "rocco";
+            sound.artist = "rocco";
             db.ListSound.Add(sound);
-            // blablabla
             MusicsFocusCommand = new DelegateCommand(doListFocus, CanListFocus);
+            OnMouseDoubleClick = new DelegateCommand(doDoubleSelected, CanDoubleSelect);
             Listdata = eMediaType.MUSIC;
-            soundList = new ObservableCollection<mySound>(db.ListSound);
+            mediaList = new ObservableCollection<Media>(db.ListSound);
         }
         public ucPlaylistModel()
         {
@@ -61,27 +52,54 @@ namespace TestUserControl
 
         public ICommand MusicsFocusCommand
         { get; set; }
+        public ICommand OnMouseDoubleClick
+        { get; set; }
+
+        private bool CanDoubleSelect()
+        {
+            return true;
+        }
 
         private bool CanListFocus()
         {
             return true;
         }
 
+        private bool CanChangeList()
+        {
+            return true;
+        }
+
+        private void doDoubleSelected(object param)
+        {
+            Console.WriteLine("here " + param.ToString());
+        }
+
+        private void doChangeList(object param)
+        {
+
+        }
+
         private void doListFocus(object param)
         {
-            if (param != null)
-                Console.WriteLine(param.ToString());
             TreeViewItem tv = param as TreeViewItem;
-            if (tv.Header == "Musics")
+            Console.WriteLine(tv.Header);
+            String header = tv.Header.ToString();
+            if (header == "Musics")
             {
-                Console.WriteLine(param.ToString());
                 Listdata = eMediaType.MUSIC;
-                soundList = new ObservableCollection<mySound>(db.ListSound);
+                mediaList = new ObservableCollection<Media>(db.ListSound);
             }
-            else if (tv.Header == "Pictures")
-                ;
-            else if (tv.Header == "Videos")
-                ;
+            else if (header == "Pictures")
+            {
+                Listdata = eMediaType.PICTURES;
+                mediaList = new ObservableCollection<Media>(db.ListPicture);
+            }
+            else if (header == "Videos")
+            {
+                Listdata = eMediaType.VIDEOS;
+                mediaList = new ObservableCollection<Media>(db.ListVideo);
+            }
         }
     }
 }
