@@ -23,10 +23,14 @@ namespace TestUserControl
         public bool pause;
         DatabasePlaylist db = new DatabasePlaylist();
         private bool fullScreen = false;
+        
 	
         public MainWindow()
 		{
 			this.InitializeComponent();
+            this.Timer.DataContext = new ucTimeModel(db);
+            ucPlaylistModel playMod = new ucPlaylistModel(db);
+            this.Playlist.DataContext = playMod;
             db.addSound("tamaman");
             db.addSound("tapapa");
             db.addSound("tachien");
@@ -36,9 +40,11 @@ namespace TestUserControl
             db.addPicture("toncul");
             db.addPicture("et toncul");
             db.SaveSoundB();
+            this.Onglet.SelectedIndex = 1;
+            playMod.MediaChanged += new EventHandler<MediaChangedEventArgs>(lib_MediaChanged);
+ 
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-            this.Timer.DataContext = new ucTimeModel(db);
-            this.Playlist.DataContext = new ucPlaylistModel(db);
+          
            
            // db.LoadSoundB();
             /*
@@ -71,7 +77,11 @@ namespace TestUserControl
             */
         }
 
-       
+        void lib_MediaChanged(object sender, MediaChangedEventArgs e)
+        {
+            Console.WriteLine("new media is " + e.NewMedia);
+        }
+
         private void PlayList_Loaded(object sender, RoutedEventArgs e)
         {
 

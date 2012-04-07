@@ -10,7 +10,13 @@ namespace TestUserControl
 {
     public class ucTimeModel : ViewModelBase
     {
-        public String chemin;
+        private  String _path;
+        public String path
+         {
+            get {return _path; }
+             set { _path = value; OnPropertyChanged("path"); Console.WriteLine("path dans uctime changed"); }
+        }
+       
         public bool mediaLoaded;
         public bool pause;
         private bool fullScreen = false;
@@ -37,7 +43,9 @@ namespace TestUserControl
         public ucTimeModel(DatabasePlaylist _db)
         {
             db = _db;
-            chemin = "";
+            Console.WriteLine("path is " + path + " current path is " + _db.currentPath);
+            db.currentPath = "lolilol";
+            Console.WriteLine("path is " + path + " current path is " + db.currentPath);
             mediaLoaded = false;
             pause = false;
             isPlay = false;
@@ -48,7 +56,6 @@ namespace TestUserControl
             ShuffleCommand = new DelegateCommand(doShuffle, CanShuffle);
             StopCommand = new DelegateCommand(doStop, CanStop);
             RepeatCommand = new DelegateCommand(doRepeat, CanRepeat);
-
         }
 
         public ICommand PlayCommand
@@ -100,6 +107,12 @@ namespace TestUserControl
         private void doPlay(object param)
         {
             Console.WriteLine("I do a Play");
+/*            MediaElement MedElem = param as MediaElement;
+            Console.WriteLine("current path is " + db.currentPath);
+            if (MedElem == null)
+              Console.WriteLine("(null)");
+            MedElem.Source = new Uri(db.currentPath);
+            Console.WriteLine("Source is " + MedElem.Source);*/
             if (mediaLoaded == true)
             {
                 if (pause == true)

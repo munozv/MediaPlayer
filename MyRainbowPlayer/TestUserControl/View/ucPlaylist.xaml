@@ -7,51 +7,51 @@
 	mc:Ignorable="d"
 	x:Class="TestUserControl.ucPlaylist"
 	x:Name="UserControl" Width="496" Height="277">
-	<UserControl.Resources>
-		<Storyboard x:Key="OnMouseEnter1">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="rectangle">
-				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="OnMouseEnter2">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[3].(GradientStop.Offset)" Storyboard.TargetName="rectangle">
-				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.201"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.422"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0.687"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="0.858"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="0.978"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="rectangle">
-				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.201"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.422"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0.687"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="0.858"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="0.996"/>
-			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
-	</UserControl.Resources>
-	<UserControl.Triggers>
-		<EventTrigger RoutedEvent="Mouse.MouseEnter">
-			<BeginStoryboard x:Name="OnMouseEnter2_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter2}"/>
-		</EventTrigger>
-		<EventTrigger RoutedEvent="Mouse.MouseLeave">
-			<RemoveStoryboard BeginStoryboardName="OnMouseEnter2_BeginStoryboard"/>
-		</EventTrigger>
-	</UserControl.Triggers>
-<Grid >
-	<Grid x:Name="LayoutRoot" HorizontalAlignment="Left" Width="200">
-		
-		<Rectangle x:Name="rectangle" Stroke="Black" StrokeThickness="0" HorizontalAlignment="Right" Width="200" d:LayoutOverrides="VerticalAlignment" Opacity="0.9" Margin="0,22,0,0">
-			<Rectangle.Fill>
-				<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-					<GradientStop Color="White" Offset="1"/>
-					<GradientStop Color="#FFBED3EB"/>
-					<GradientStop Color="White" Offset="1"/>
-					<GradientStop Color="#FFBED3EB"/>
-				</LinearGradientBrush>
-			</Rectangle.Fill>
-		</Rectangle>
-		<TreeView x:Name="Playlist" Opacity="0.79" FontFamily="Lucida Console" HorizontalAlignment="Right" Width="200" d:LayoutOverrides="VerticalAlignment" BorderThickness="0" Background="{x:Null}" Margin="0,22,0,0">
+    <UserControl.Resources>
+        <Storyboard x:Key="OnMouseEnter1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="rectangle">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="OnMouseEnter2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[3].(GradientStop.Offset)" Storyboard.TargetName="rectangle">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.201"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.422"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0.687"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="0.858"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="0.978"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="rectangle">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.201"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.422"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0.687"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.8" Value="0.858"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.2" Value="0.996"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+            <BeginStoryboard x:Name="OnMouseEnter2_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter2}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+            <RemoveStoryboard BeginStoryboardName="OnMouseEnter2_BeginStoryboard"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid >
+        <Grid x:Name="LayoutRoot" HorizontalAlignment="Left" Width="200">
+
+            <Rectangle x:Name="rectangle" Stroke="Black" StrokeThickness="0" HorizontalAlignment="Right" Width="200" d:LayoutOverrides="VerticalAlignment" Opacity="0.9" Margin="0,22,0,0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFBED3EB"/>
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFBED3EB"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <TreeView x:Name="Playlist" Opacity="0.79" FontFamily="Lucida Console" HorizontalAlignment="Right" Width="200" d:LayoutOverrides="VerticalAlignment" BorderThickness="0" Background="{x:Null}" Margin="0,22,0,0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectedItemChanged">
                         <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Playlist, Path=SelectedItem}"/>
@@ -59,18 +59,18 @@
                 </i:Interaction.Triggers>
 
                 <TreeViewItem x:Name="itemPlaylist" Header="Playlist" IsExpanded="True" Background="#00000000" GotFocus="PlaylistFocus">
-				<TreeViewItem Header="Default Playlist"  />
-			</TreeViewItem>
+                    <TreeViewItem Header="Default Playlist"  />
+                </TreeViewItem>
                 <TreeViewItem x:Name="itemMusics" Header="Musics" IsExpanded="True">
-				<TreeViewItem Header="Artist" GotFocus="ArtistFocus"/>
-				<TreeViewItem Header="Album" GotFocus="AlbumFocus"/>
-				<TreeViewItem Header="Genre" GotFocus="GenreFocus"/>
-			</TreeViewItem>
-			<TreeViewItem x:Name="itemsPictures" Header="Pictures" GotFocus="PicturesFocus"/>
-			<TreeViewItem x:Name="itemsVideos" Header="Videos" GotFocus="VideosFocus"/>
-		</TreeView>
-		
-	</Grid>
+                    <TreeViewItem Header="Artist" GotFocus="ArtistFocus"/>
+                    <TreeViewItem Header="Album" GotFocus="AlbumFocus"/>
+                    <TreeViewItem Header="Genre" GotFocus="GenreFocus"/>
+                </TreeViewItem>
+                <TreeViewItem x:Name="itemsPictures" Header="Pictures" GotFocus="PicturesFocus"/>
+                <TreeViewItem x:Name="itemsVideos" Header="Videos" GotFocus="VideosFocus"/>
+            </TreeView>
+
+        </Grid>
         <DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0"   ItemsSource="{Binding mediaList, UpdateSourceTrigger=PropertyChanged}"  d:LayoutOverrides="GridBox" IsReadOnly="True">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
@@ -79,32 +79,32 @@
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding OnMouseDoubleClick}" CommandParameter="{Binding ElementName=Tablesheet, Path=SelectedItem}" />
                 </i:EventTrigger>
-            </i:Interaction.Triggers>   
-		</DataGrid>
-		<Grid x:Name="menu" Height="23" VerticalAlignment="Top">
-		<Rectangle Stroke="Black" StrokeThickness="0" Margin="0,0,0,0" Height="22" VerticalAlignment="Top">
-			<Rectangle.Fill>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="White"/>
-					<GradientStop Color="#FFBED3EB" Offset="0.517"/>
-				</LinearGradientBrush>
-			</Rectangle.Fill>
-		</Rectangle>
-		<Menu x:Name="Menu" FontFamily="Lucida Console" Height="20" VerticalAlignment="Top" Margin="8,2,0,0" Background="{x:Null}" Foreground="Black">
-			<MenuItem x:Name="File" Header="File" Background="{x:Null}" >
-				<MenuItem x:Name="Open" Header="Open" Background="#FFBED3EB"/>
-				<MenuItem x:Name="CreatePlaylist" Header="Create Playlist" Background="#FFBED3EB" />
-			</MenuItem>
-			<MenuItem x:Name="Play" Header="Play">
-				<MenuItem x:Name="PlayAndPause" Header="Play / Pause" Background="#FFBED3EB" />
-				<MenuItem x:Name="StopButton" Header="Stop" Background="#FFBED3EB" />
-				<MenuItem x:Name="ShuffleButton" Header="Shuffle" Background="#FFBED3EB" />
-				<MenuItem x:Name="LoopButton" Header="Loop" Background="#FFBED3EB" />
-			</MenuItem>
-			<MenuItem x:Name="Help" Header="Help">
-				<MenuItem x:Name="About" Header="About MyLittlePlayer" Background="#FFBED3EB" />
-			</MenuItem>
-		</Menu>
-	</Grid>
-		</Grid>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        <Grid x:Name="menu" Height="23" VerticalAlignment="Top">
+            <Rectangle Stroke="Black" StrokeThickness="0" Margin="0,0,0,0" Height="22" VerticalAlignment="Top">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White"/>
+                        <GradientStop Color="#FFBED3EB" Offset="0.517"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Menu x:Name="Menu" FontFamily="Lucida Console" Height="20" VerticalAlignment="Top" Margin="8,2,0,0" Background="{x:Null}" Foreground="Black">
+                <MenuItem x:Name="File" Header="File" Background="{x:Null}" >
+                    <MenuItem x:Name="Open" Header="Open" Background="#FFBED3EB"/>
+                    <MenuItem x:Name="CreatePlaylist" Header="Create Playlist" Background="#FFBED3EB" />
+                </MenuItem>
+                <MenuItem x:Name="Play" Header="Play">
+                    <MenuItem x:Name="PlayAndPause" Header="Play / Pause" Background="#FFBED3EB" />
+                    <MenuItem x:Name="StopButton" Header="Stop" Background="#FFBED3EB" />
+                    <MenuItem x:Name="ShuffleButton" Header="Shuffle" Background="#FFBED3EB" />
+                    <MenuItem x:Name="LoopButton" Header="Loop" Background="#FFBED3EB" />
+                </MenuItem>
+                <MenuItem x:Name="Help" Header="Help">
+                    <MenuItem x:Name="About" Header="About MyLittlePlayer" Background="#FFBED3EB" />
+                </MenuItem>
+            </Menu>
+        </Grid>
+    </Grid>
 </UserControl>

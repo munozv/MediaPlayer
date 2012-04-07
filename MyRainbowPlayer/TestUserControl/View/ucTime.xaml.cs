@@ -33,7 +33,7 @@ namespace TestUserControl
 		// Les bouttons Play/Pause/Stop/Shuffle/Repeat existe aussi
 		// dans le controller ucMenuBar <----- Todo
 		//
-
+            
        
 
 		private void ButtonPrevClick(object sender, System.Windows.RoutedEventArgs e)

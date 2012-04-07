@@ -4,11 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Linq;
 
 namespace TestUserControl
 {
-    public class DatabasePlaylist
+    public class DatabasePlaylist : ViewModelBase
     {
+        private String _curPath;
+
+        public String currentPath
+        {
+           get {return _curPath; }
+           set
+           {
+            _curPath = value;
+            OnPropertyChanged("currentPath");
+           }
+    }
+
         private List<Media> listPicture;
         public List<Media> ListPicture
         {
@@ -30,6 +43,8 @@ namespace TestUserControl
 
         public DatabasePlaylist()
         {
+            currentPath = "debut";
+          
             ListPicture = new List<Media>();
             listSound = new List<Media>();
             listVideo = new List<Media>();
@@ -45,6 +60,7 @@ namespace TestUserControl
 
         public void LoadSoundB()
         {
+     
             int i = 0;
             XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
             FileStream fs = new FileStream("songs.xml", FileMode.Open);
@@ -57,11 +73,17 @@ namespace TestUserControl
             }
         }
 
+        public void addInLibrary(Media newMed)
+        {
+            XDocument xmlDoc = XDocument.Load("songs.xml");
+
+            xmlDoc.Element("Media").Add(new XElement("new", newMed));
+        }
+
         public void addSound(String path)
         {
             // gettage des infos depuis le path
             Media sound = new Media();
-
             sound.path = path;
             sound.name = "recupfrompath";
             sound.genre = "rock";

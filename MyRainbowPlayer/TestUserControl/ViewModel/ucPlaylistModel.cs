@@ -5,12 +5,13 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Xml.Linq;
 
 namespace TestUserControl
 {
     public class ucPlaylistModel : ViewModelBase
     {
-       
+
         public enum eMediaType
         {
             PICTURES,
@@ -29,8 +30,8 @@ namespace TestUserControl
                 OnPropertyChanged("mediaList");
             }
         }
-       public eMediaType Listdata;
-       public ucPlaylistModel(DatabasePlaylist ddb)
+        public eMediaType Listdata;
+        public ucPlaylistModel(DatabasePlaylist ddb)
         {
             db = ddb;
             Media sound = new Media();
@@ -72,8 +73,21 @@ namespace TestUserControl
 
         private void doDoubleSelected(object param)
         {
-            Console.WriteLine("here " + param.ToString());
+            Media myMedia = param as Media;
+
+            db.currentPath = myMedia.path;
+            //  OnPropertyChanged("currentMedia");
+            OnMediaChanged(myMedia.path);
+//            Console.WriteLine("here current path is " + db.currentPath);
+
         }
+
+        public void OnMediaChanged(string MediaSource)
+        {
+            if (MediaChanged != null)
+                MediaChanged(this, new MediaChangedEventArgs(MediaSource));
+        }
+        public event EventHandler<MediaChangedEventArgs> MediaChanged;
 
         private void doChangeList(object param)
         {

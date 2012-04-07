@@ -81,8 +81,8 @@
 		</EventTrigger>
 	</UserControl.Triggers>
 	<Grid Margin="0,-228,0,0">
-       
-        <MediaElement x:Name="MedElem" Margin="0,0,0,201.667" Source="{Binding SelectedVideoProperty}" >
+
+        <MediaElement x:Name="MedElem" Margin="0,0,0,201.667" LoadedBehavior="Manual" Source="{Binding path,UpdateSourceTrigger=PropertyChanged}" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MediaOpened">
                     <i:InvokeCommandAction Command="{Binding MediaOpenedCommand}" CommandParameter="{Binding ElementName=MedElem, Mode=OneWay}"/>
