@@ -141,7 +141,7 @@
                     <SolidColorBrush Color="#FFBED3EB" Opacity="0.23"/>
                 </Button.Background>
             </Button>
-        <Button x:Name="buttonPlay" Command="{Binding PlayCommand}" Content="{Binding Path=TextPlay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="163.5,55.5,0,0" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Top" Click="ButtonPlayClick">
+        <Button x:Name="buttonPlay" Command="{Binding PlayCommand}" Content="{Binding Path=TextPlay,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" Margin="163.5,55.5,0,0" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Top" Click="ButtonPlayClick">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -180,7 +180,7 @@
                     <SolidColorBrush Color="#FFAFCAE9" Opacity="0.23"/>
                 </Button.Background>
             </Button>
-            <Slider x:Name="SoundSlider" Height="14.333" VerticalAlignment="Bottom" Style="{DynamicResource SimpleSlider}" Foreground="#FF2F83E4" Margin="473,0,0,29.667" HorizontalAlignment="Left" Width="102">
+            <Slider x:Name="SoundSlider"  Height="14.333" VerticalAlignment="Bottom" Style="{DynamicResource SimpleSlider}" Foreground="#FF2F83E4" Margin="473,0,0,29.667" Value ="0.5" HorizontalAlignment="Left" Width="102" Maximum="1" >
                 <Slider.Background>
                     <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                         <GradientStop Color="#FFBED3EB" Offset="0.339"/>
@@ -221,7 +221,7 @@
                     <SolidColorBrush Color="#FFBED3EB" Opacity="0.23"/>
                 </Button.Background>
             </Button>
-            <Slider x:Name="MediaSlider1" Margin="0,19.667,-1,0" Style="{DynamicResource SimpleSlider}" Height="18" VerticalAlignment="Top">
+            <Slider x:Name="MediaSlider1" Minimum="1" Maximum="{Binding MaxSlidValue}" Margin="0,19.667,-1,0" Value="{Binding ValueTimer, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource SimpleSlider}" Height="18" VerticalAlignment="Top">
             	<Slider.Background>
             		<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
             			<GradientStop Color="White" Offset="0"/>

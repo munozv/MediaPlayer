@@ -28,8 +28,12 @@ namespace TestUserControl
             vm.TimeViewModel.myMedElem = this.Timer.MedElem;
             this.Timer.DataContext = vm.TimeViewModel;
             this.Playlist.DataContext = vm.PlaylistViewModel;
+            vm.TimeViewModel.setTimer();
             this.Playlist.Tablesheet.MouseDoubleClick += new MouseButtonEventHandler(vm.PlaylistViewModel.OnMouseDoubleClick2);
             this.Playlist.Menu.MouseEnter += new MouseEventHandler(vm.PlaylistViewModel.setVisibilityCreate);
+            this.Timer.SoundSlider.ValueChanged +=new RoutedPropertyChangedEventHandler<double>(vm.TimeViewModel.Slider_ValueChanged);
+           this.Timer.MediaSlider1.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(vm.TimeViewModel.sldTimeLine_PreviewMouseLeftButtonDown);
+            this.Timer.MediaSlider1.PreviewMouseLeftButtonUp += new MouseButtonEventHandler(vm.TimeViewModel.sldTimeLine_PreviewMouseLeftButtonUp);
         }
     }
 }

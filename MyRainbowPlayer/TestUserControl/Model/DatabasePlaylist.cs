@@ -19,12 +19,15 @@ namespace TestUserControl
             {
                 _curPath = value;
                 OnPropertyChanged("currentPath");
+                Console.WriteLine("_curPath = " + _curPath);
             }
         }
 
         public void addCurrent(String path)
         {
             Media media = new Media();
+            if (path == currentPath)
+                return;
             Mp3Tag tag = new Mp3Tag(path);
 
             if (tag.ReadData())

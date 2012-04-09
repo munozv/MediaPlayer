@@ -65,5 +65,10 @@ namespace TestUserControl
 		{
 			// TODO: Add event handler implementation here.
 		}
+
+        private void MedElem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
 	}
 }

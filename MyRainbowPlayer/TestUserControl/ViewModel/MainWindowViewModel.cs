@@ -15,6 +15,7 @@ namespace TestUserControl
         public bool pause;
         DatabasePlaylist db = new DatabasePlaylist();
         private bool fullScreen = false;
+
         private int _MyIndexTab;
         public int MyIndexTab
         {
@@ -68,19 +69,9 @@ namespace TestUserControl
         void lib_MediaChanged(object sender, MediaChangedEventArgs e)
         {
             MyIndexTab = 0;
-            OpenFileDialog fenetre = new OpenFileDialog();
 
-            fenetre.Filter = "All Files (*.*)|*.*";
-            fenetre.Title = "Select your files      ";
-
-            if (fenetre.ShowDialog() == true)
-            {
-                chemin = fenetre.FileName;
-                Console.WriteLine(chemin);
-                db.addCurrent(chemin);
-                this._timeViewModel.myMedElem.Source = new Uri(chemin);
-                this._timeViewModel.myMedElem.Play();
-            }
+           // db.addCurrent(e.NewMedia.path);
+            this._timeViewModel.loadPath(e.NewMedia.path);
         }
 
         private void PlayList_Loaded(object sender, RoutedEventArgs e)
@@ -90,7 +81,7 @@ namespace TestUserControl
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           
+
         }
 
         private void MenuBar_Clicked(object sender, RoutedEventArgs e)

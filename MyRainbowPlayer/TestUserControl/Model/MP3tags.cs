@@ -245,7 +245,10 @@ namespace TestUserControl
                 int nb;
                 nb = fs.Read(Buffer, 0, TagsDataSize);
                 if (nb != TagsDataSize)
+                {
+                    fs.Close();
                     return (false);
+                }
                 fs.Close();
                 Encoding ascii = new ASCIIEncoding();
                 this.FileData = ascii.GetString(Buffer);
