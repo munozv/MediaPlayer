@@ -6,19 +6,54 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
+using Microsoft.Win32;
+using System.Windows;
+using System.Windows.Media;
 
 namespace TestUserControl
 {
     public class ucPlaylistModel : ViewModelBase
     {
-
         public enum eMediaType
         {
+            ALL,
             PICTURES,
             MUSIC,
             VIDEOS
         }
 
+        #region Command
+
+        public ICommand MusicsFocusCommand
+        { get; set; }
+        public ICommand OpenFile
+        { get; set; }
+        public ICommand CreatePlaylist
+        { get; set; }
+
+
+        public bool CanOpenFile()
+        {
+            return true;
+        }
+
+        public bool CanCreateList()
+        {
+            return true;
+        }
+
+        private bool CanListFocus()
+        {
+            return true;
+        }
+
+        private bool CanChangeList()
+        {
+            return true;
+        }
+        #endregion
+
+        public string chemin { get; set; }
         public DatabasePlaylist db;
         private ObservableCollection<Media> p_list;
         public ObservableCollection<Media> mediaList
@@ -30,39 +65,84 @@ namespace TestUserControl
                 OnPropertyChanged("mediaList");
             }
         }
+
+        private Visibility _createVisibility;
+        public Visibility createVisibility
+        {
+            get { return _createVisibility; }
+            set { _createVisibility = value; OnPropertyChanged("createVisibility"); }
+        }
+
         public eMediaType Listdata;
         public ucPlaylistModel(DatabasePlaylist ddb)
         {
             db = ddb;
-            Media sound = new Media();
-
-            sound.path = "test";
-            sound.name = "recupfrompath";
-            sound.genre = "rock";
-            sound.artist = "rocco";
-            db.ListSound.Add(sound);
             MusicsFocusCommand = new DelegateCommand(doListFocus, CanListFocus);
+            OpenFile = new DelegateCommand(doOpenFile, CanOpenFile);
             Listdata = eMediaType.MUSIC;
-            mediaList = new ObservableCollection<Media>(db.ListSound);
-        }
-        public ucPlaylistModel()
-        {
-            db = null;
+            mediaList = new ObservableCollection<Media>(db.ListCurrent);
+            CreatePlaylist = new DelegateCommand(doCreateList, CanCreateList);
         }
 
-        public ICommand MusicsFocusCommand
-        { get; set; }
-      
-        private bool CanListFocus()
+        public void setVisibilityCreate(object param, RoutedEventArgs e)
         {
-            return true;
+            if (db.ListCurrent.Count() != 0)
+                createVisibility = Visibility.Visible;
+           else
+                createVisibility = Visibility.Collapsed;
         }
 
-        private bool CanChangeList()
+        public void doCreateList(object param)
         {
-            return true;
+            ucNewPlaylistModel npm = new ucNewPlaylistModel();
+            ucNewPlaylist window = new ucNewPlaylist();
+            window.DataContext = npm;
+            window.Title = "Create a New Playlist";
+            Console.WriteLine("Playlist name = " + npm.text);
         }
 
+        private void doListFocus(object param)
+        {
+            TreeViewItem tv = param as TreeViewItem;
+            Console.WriteLine(tv.Header);
+            String header = tv.Header.ToString();
+            if (header == "Current List")
+            {
+                Listdata = eMediaType.ALL;
+                mediaList = new ObservableCollection<Media>(db.ListCurrent);
+            }
+            else if (header == "Musics")
+            {
+                Listdata = eMediaType.MUSIC;
+                mediaList = new ObservableCollection<Media>(db.ListSound);
+            }
+            else if (header == "Pictures")
+            {
+                Listdata = eMediaType.PICTURES;
+                mediaList = new ObservableCollection<Media>(db.ListPicture);
+            }
+            else if (header == "Videos")
+            {
+                Listdata = eMediaType.VIDEOS;
+                mediaList = new ObservableCollection<Media>(db.ListVideo);
+            }
+        }
+
+        public void doOpenFile(object param)
+        {
+            OpenFileDialog fenetre = new OpenFileDialog();
+
+            fenetre.Filter = "All Files (*.*)|*.*";
+            fenetre.Title = "Select your files     ";
+
+            if (fenetre.ShowDialog() == true)
+            {
+                chemin = fenetre.FileName;
+                db.addCurrent(chemin);
+                mediaList = new ObservableCollection<Media>(db.ListCurrent);
+            }
+        }
+    
         public void OnMouseDoubleClick2(object sender, MouseButtonEventArgs e)
         {
             DataGrid myplay = (DataGrid)sender;
@@ -82,31 +162,6 @@ namespace TestUserControl
         }
         public event EventHandler<MediaChangedEventArgs> MediaChanged;
 
-        private void doChangeList(object param)
-        {
 
-        }
-
-        private void doListFocus(object param)
-        {
-            TreeViewItem tv = param as TreeViewItem;
-            Console.WriteLine(tv.Header);
-            String header = tv.Header.ToString();
-            if (header == "Musics")
-            {
-                Listdata = eMediaType.MUSIC;
-                mediaList = new ObservableCollection<Media>(db.ListSound);
-            }
-            else if (header == "Pictures")
-            {
-                Listdata = eMediaType.PICTURES;
-                mediaList = new ObservableCollection<Media>(db.ListPicture);
-            }
-            else if (header == "Videos")
-            {
-                Listdata = eMediaType.VIDEOS;
-                mediaList = new ObservableCollection<Media>(db.ListVideo);
-            }
-        }
     }
 }

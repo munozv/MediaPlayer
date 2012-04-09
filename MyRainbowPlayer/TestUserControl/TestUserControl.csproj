@@ -72,6 +72,7 @@
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ucMenuBarModel.cs" />
+    <Compile Include="ViewModel\ucNewPlaylistModel.cs" />
     <Compile Include="ViewModel\ucPlaylistModel.cs" />
     <Compile Include="ViewModel\ucTimeModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

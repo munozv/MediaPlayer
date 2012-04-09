@@ -16,20 +16,23 @@ namespace TestUserControl
 	/// <summary>
 	/// Interaction logic for ucNewPlaylist.xaml
 	/// </summary>
-	public partial class ucNewPlaylist : UserControl
+	public partial class ucNewPlaylist : Window
 	{
 		public ucNewPlaylist()
 		{
+
 			this.InitializeComponent();
 		}
 
 		private void ButtonCreateClick(object sender, System.Windows.RoutedEventArgs e)
 		{
+            this.Close();
 			// TODO: Add event handler implementation here.
 		}
 
 		private void ButtonCancelClick(object sender, System.Windows.RoutedEventArgs e)
 		{
+         
 			// TODO: Add event handler implementation here.
 		}
 	}

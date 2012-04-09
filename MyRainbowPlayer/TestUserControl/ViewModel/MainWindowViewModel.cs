@@ -78,9 +78,9 @@ namespace TestUserControl
                 chemin = fenetre.FileName;
                 Console.WriteLine(chemin);
                 db.addCurrent(chemin);
+                this._timeViewModel.myMedElem.Source = new Uri(chemin);
+                this._timeViewModel.myMedElem.Play();
             }
-            this._timeViewModel.myMedElem.Source = new Uri(chemin);
-            this._timeViewModel.myMedElem.Play();
         }
 
         private void PlayList_Loaded(object sender, RoutedEventArgs e)

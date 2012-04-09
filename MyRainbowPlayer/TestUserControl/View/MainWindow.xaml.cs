@@ -29,7 +29,7 @@ namespace TestUserControl
             this.Timer.DataContext = vm.TimeViewModel;
             this.Playlist.DataContext = vm.PlaylistViewModel;
             this.Playlist.Tablesheet.MouseDoubleClick += new MouseButtonEventHandler(vm.PlaylistViewModel.OnMouseDoubleClick2);
-
+            this.Playlist.Menu.MouseEnter += new MouseEventHandler(vm.PlaylistViewModel.setVisibilityCreate);
         }
     }
 }

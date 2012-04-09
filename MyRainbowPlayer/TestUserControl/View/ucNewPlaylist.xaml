@@ -1,24 +1,24 @@
-﻿<UserControl
+﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	x:Class="TestUserControl.ucNewPlaylist"
-	x:Name="UserControl" Background="#FF9EDBF8" Height="173" Width="420">
+	x:Name="myWindow" Background="#FF9EDBF8" Height="173" Width="420">
 
 	<Grid x:Name="LayoutRoot">
-		<Image Height="174" VerticalAlignment="Top" Source="logoRainbow.png" HorizontalAlignment="Left" Width="320"/>
-		<TextBox Height="18" Margin="201,50,0,0" TextWrapping="Wrap" Text="Playlist Name" VerticalAlignment="Top" FontFamily="Lucida Console" HorizontalAlignment="Left" Width="188"/>
-		<Button x:Name="buttonCreate" Content="Create" HorizontalAlignment="Right" Margin="0,0,84.833,21.333" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Bottom" Click="ButtonCreateClick">
+		<Image Height="174" VerticalAlignment="Top" Source="logoRainbow.png" HorizontalAlignment="Left" Width="320" Margin="-7,0,0,0" />
+		<TextBox x:Name="textplay" Height="18" Margin="201,50,0,0" TextWrapping="Wrap" Text="{Binding text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" FontFamily="Lucida Console" HorizontalAlignment="Left" Width="188"/>
+        <Button x:Name="buttonCreate" Content="Create" HorizontalAlignment="Right" Margin="0,0,84.833,21.333" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Bottom" Command="{Binding create}" CommandParameter="{Binding ElementName=myWindow}">
 			<Button.Background>
 				<SolidColorBrush Color="#FFAFCAE9" Opacity="0.23"/>
 			</Button.Background>
 		</Button>
-		<Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,13.833,21.333" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Bottom" Click="ButtonCancelClick">
-			<Button.Background>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,13.833,21.333" Width="57.667" Style="{DynamicResource SimpleButton}" Foreground="#FF2F83E4" FontWeight="Bold" FontFamily="Lucida Console" BorderThickness="2" RenderTransformOrigin="0.5,0.5" BorderBrush="White" Height="32.167" VerticalAlignment="Bottom" Command="{Binding close}" CommandParameter="{Binding ElementName=myWindow}" >
+            <Button.Background>
 				<SolidColorBrush Color="#FFAFCAE9" Opacity="0.23"/>
 			</Button.Background>
 		</Button>
 	</Grid>
-</UserControl>
+</Window>

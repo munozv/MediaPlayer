@@ -39,7 +39,7 @@ namespace TestUserControl
                 Console.WriteLine("Genre:   " + tag.Genre);
                 Console.WriteLine("");
                 media.path = path;
-                media.name = tag.FileName;
+                media.name = tag.Title;
                 media.genre = tag.Genre;
                 media.artist = tag.Artist;
                 media.type = eMediaType.SOUND;
