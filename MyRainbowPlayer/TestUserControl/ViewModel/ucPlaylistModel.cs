@@ -42,7 +42,6 @@ namespace TestUserControl
             sound.artist = "rocco";
             db.ListSound.Add(sound);
             MusicsFocusCommand = new DelegateCommand(doListFocus, CanListFocus);
-            OnMouseDoubleClick = new DelegateCommand(doDoubleSelected, CanDoubleSelect);
             Listdata = eMediaType.MUSIC;
             mediaList = new ObservableCollection<Media>(db.ListSound);
         }
@@ -53,14 +52,7 @@ namespace TestUserControl
 
         public ICommand MusicsFocusCommand
         { get; set; }
-        public ICommand OnMouseDoubleClick
-        { get; set; }
-
-        private bool CanDoubleSelect()
-        {
-            return true;
-        }
-
+      
         private bool CanListFocus()
         {
             return true;
@@ -71,18 +63,19 @@ namespace TestUserControl
             return true;
         }
 
-        private void doDoubleSelected(object param)
+        public void OnMouseDoubleClick2(object sender, MouseButtonEventArgs e)
         {
-            Media myMedia = param as Media;
+            DataGrid myplay = (DataGrid)sender;
 
-            db.currentPath = myMedia.path;
-            //  OnPropertyChanged("currentMedia");
-            OnMediaChanged(myMedia.path);
-//            Console.WriteLine("here current path is " + db.currentPath);
-
+            if (myplay.SelectedItem != null)
+            {
+                Media med = (Media)myplay.SelectedItem;
+                db.currentPath = med.path;
+                e.Handled = true;
+                OnMediaChanged(med);
+            }
         }
-
-        public void OnMediaChanged(string MediaSource)
+        public void OnMediaChanged(Media MediaSource)
         {
             if (MediaChanged != null)
                 MediaChanged(this, new MediaChangedEventArgs(MediaSource));

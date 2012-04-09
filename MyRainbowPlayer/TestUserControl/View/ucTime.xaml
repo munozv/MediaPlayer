@@ -9,7 +9,7 @@
 	xmlns:local="clr-namespace:TestUserControl"
 	mc:Ignorable="d"
 	x:Class="TestUserControl.ucTime"
-	x:Name="UserControl" Width="639" Height="201.667">
+	x:Name="UserControl" Width="639" Height="563">
     <UserControl.Resources >
             <Style TargetType="{x:Type Button}">
                 <Setter Property="Template" >
@@ -82,7 +82,7 @@
 	</UserControl.Triggers>
 	<Grid Margin="0,-228,0,0">
 
-        <MediaElement x:Name="MedElem" Margin="0,0,0,201.667" LoadedBehavior="Manual" Source="{Binding path,UpdateSourceTrigger=PropertyChanged}" >
+        <MediaElement x:Name="MedElem" Margin="-134,0,-96,201.667" LoadedBehavior="Manual" Source="{Binding path,UpdateSourceTrigger=PropertyChanged}" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MediaOpened">
                     <i:InvokeCommandAction Command="{Binding MediaOpenedCommand}" CommandParameter="{Binding ElementName=MedElem, Mode=OneWay}"/>

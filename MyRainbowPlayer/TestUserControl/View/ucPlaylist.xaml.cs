@@ -21,6 +21,7 @@ namespace TestUserControl
 		public ucPlaylist()
 		{
             this.InitializeComponent();
+        
 		}
 
 		private void PlaylistFocus(object sender, System.Windows.RoutedEventArgs e)
@@ -58,5 +59,6 @@ namespace TestUserControl
 			// TODO: Add event handler implementation here.
 		}
 
+     
 	}
 }

@@ -16,7 +16,13 @@ namespace TestUserControl
             get {return _path; }
              set { _path = value; OnPropertyChanged("path"); Console.WriteLine("path dans uctime changed"); }
         }
-       
+
+        private MediaElement _myMedElem;
+        public MediaElement myMedElem
+        {
+            get { return _myMedElem; }
+            set { _myMedElem = value; }
+        }
         public bool mediaLoaded;
         public bool pause;
         private bool fullScreen = false;
@@ -29,7 +35,7 @@ namespace TestUserControl
         public string TextPlay
         {
             get { return _TextPlay; }
-            protected set
+            set
             {
                 _TextPlay = value;
                 OnPropertyChanged("TextPlay");

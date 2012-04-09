@@ -14,14 +14,48 @@ namespace TestUserControl
 
         public String currentPath
         {
-           get {return _curPath; }
-           set
-           {
-            _curPath = value;
-            OnPropertyChanged("currentPath");
-           }
-    }
+            get { return _curPath; }
+            set
+            {
+                _curPath = value;
+                OnPropertyChanged("currentPath");
+            }
+        }
 
+        public void addCurrent(String path)
+        {
+            Media media = new Media();
+            Mp3Tag tag = new Mp3Tag(path);
+
+            if (tag.ReadData())
+            {
+                Console.WriteLine("========= " + tag.FileName + " =========");
+                Console.WriteLine("Title:   " + tag.Title);
+                Console.WriteLine("Artist:  " + tag.Artist);
+                Console.WriteLine("Album:   " + tag.Album);
+                Console.WriteLine("Year:    " + tag.Year);
+                Console.WriteLine("Track:   " + tag.Track);
+                Console.WriteLine("Comment: " + tag.Comment);
+                Console.WriteLine("Genre:   " + tag.Genre);
+                Console.WriteLine("");
+                media.path = path;
+                media.name = tag.FileName;
+                media.genre = tag.Genre;
+                media.artist = tag.Artist;
+                media.type = eMediaType.SOUND;
+                listCurrent.Add(media);
+            }
+            else
+                Console.WriteLine("EPIC FAIL");
+        }
+        private List<Media> listCurrent;
+        public List<Media> ListCurrent
+        {
+            get { return listCurrent; }
+            set { listCurrent = value; }
+        }
+
+        
         private List<Media> listPicture;
         public List<Media> ListPicture
         {
@@ -44,10 +78,10 @@ namespace TestUserControl
         public DatabasePlaylist()
         {
             currentPath = "debut";
-          
             ListPicture = new List<Media>();
             listSound = new List<Media>();
             listVideo = new List<Media>();
+            ListCurrent = new List<Media>();
         }
 
         public void SaveSoundB()
@@ -60,12 +94,12 @@ namespace TestUserControl
 
         public void LoadSoundB()
         {
-     
+
             int i = 0;
             XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
             FileStream fs = new FileStream("songs.xml", FileMode.Open);
-            listSound = (List<Media>) xse.Deserialize(fs);
-            
+            listSound = (List<Media>)xse.Deserialize(fs);
+
             while (i != listSound.Count())
             {
                 Console.WriteLine("album " + i + " " + listSound[i].path);
@@ -75,9 +109,7 @@ namespace TestUserControl
 
         public void addInLibrary(Media newMed)
         {
-            XDocument xmlDoc = XDocument.Load("songs.xml");
 
-            xmlDoc.Element("Media").Add(new XElement("new", newMed));
         }
 
         public void addSound(String path)

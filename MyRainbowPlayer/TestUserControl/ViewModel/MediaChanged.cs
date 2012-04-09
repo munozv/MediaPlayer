@@ -7,11 +7,11 @@ namespace TestUserControl
 {
     public class MediaChangedEventArgs : EventArgs
     {
-        public MediaChangedEventArgs(string newMedia)
+        public MediaChangedEventArgs(Media newMedia)
         {
             this.NewMedia = newMedia;
         }
 
-        public string NewMedia { get; private set; }
+        public Media NewMedia { get; private set; }
     }
 }
