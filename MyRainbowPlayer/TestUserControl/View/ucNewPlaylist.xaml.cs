@@ -26,7 +26,6 @@ namespace TestUserControl
 
 		private void ButtonCreateClick(object sender, System.Windows.RoutedEventArgs e)
 		{
-            this.Close();
 			// TODO: Add event handler implementation here.
 		}
 

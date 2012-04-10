@@ -6,6 +6,8 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows;
+using System.IO;
+using System.Reflection;
 
 namespace TestUserControl
 {
@@ -15,7 +17,7 @@ namespace TestUserControl
         public String path
         {
             get { return _path; }
-            set { _path = value; OnPropertyChanged("path"); Console.WriteLine("path dans uctime changed"); }
+            set { _path = value; OnPropertyChanged("path"); }
         }
 
         private MediaElement _myMedElem;
@@ -50,9 +52,6 @@ namespace TestUserControl
         public ucTimeModel(DatabasePlaylist _db)
         {
             db = _db;
-            Console.WriteLine("path is " + path + " current path is " + _db.currentPath);
-            db.currentPath = "lolilol";
-            Console.WriteLine("path is " + path + " current path is " + db.currentPath);
             mediaLoaded = false;
             pause = false;
             isPlay = false;
@@ -63,7 +62,7 @@ namespace TestUserControl
             ShuffleCommand = new DelegateCommand(doShuffle, CanShuffle);
             StopCommand = new DelegateCommand(doStop, CanStop);
             RepeatCommand = new DelegateCommand(doRepeat, CanRepeat);
-         //   Fullscreen = new DelegateCommand(doFullscreen, CanFullscreen);
+            //   Fullscreen = new DelegateCommand(doFullscreen, CanFullscreen);
         }
 
         public ICommand Fullscreen
@@ -76,23 +75,23 @@ namespace TestUserControl
 
         public void doFullscreen(object param)
         {
-/*            if (!fullScreen)
-            {
-                ucTime lol = new ucTime();
-                lol.DataContext = this;
-                lol.MedElem = myMedElem;
-                this.Content = lol;
-                this.WindowStyle = WindowStyle.None;
-                this.WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                this.Content = myGrid;
-                gridroot.Children.Add(medElem);
-                this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.WindowState = WindowState.Normal;
-            }
-            fullScreen = !fullScreen;*/
+            /*            if (!fullScreen)
+                        {
+                            ucTime lol = new ucTime();
+                            lol.DataContext = this;
+                            lol.MedElem = myMedElem;
+                            this.Content = lol;
+                            this.WindowStyle = WindowStyle.None;
+                            this.WindowState = WindowState.Maximized;
+                        }
+                        else
+                        {
+                            this.Content = myGrid;
+                            gridroot.Children.Add(medElem);
+                            this.WindowStyle = WindowStyle.SingleBorderWindow;
+                            this.WindowState = WindowState.Normal;
+                        }
+                        fullScreen = !fullScreen;*/
         }
 
         public void setTimer()
@@ -139,8 +138,25 @@ namespace TestUserControl
 
         private void myMedOpened(object sender, RoutedEventArgs e)
         {
-            MaxSlidValue = myMedElem.NaturalDuration.TimeSpan.TotalMilliseconds;
+            Mp3Tag mp3 = new Mp3Tag(myMedElem.Source.ToString());
 
+            if (mp3.ReadData() == true)
+            {
+                db.addSound(myMedElem.Source.ToString());
+                MaxSlidValue = myMedElem.NaturalDuration.TimeSpan.TotalMilliseconds;
+            }
+            else
+            {
+                JPGTag jpg = new JPGTag(myMedElem.Source.ToString());
+
+                if (jpg.ReadData() == true)
+                    db.addPicture(myMedElem.Source.ToString());
+                else
+                {
+                    MaxSlidValue = myMedElem.NaturalDuration.TimeSpan.TotalMilliseconds;
+                    db.addVideo(myMedElem.Source.ToString());
+                }
+            }
         }
         private bool CanMediaOpened(object param)
         {
@@ -184,16 +200,6 @@ namespace TestUserControl
                 }
                 if (!_userUpdatingTime)
                     ValueTimer = myMedElem.Position.TotalMilliseconds;
-                //                txtBuffer.Text = (myMedElem.BufferingProgress * 100).ToString();
-
-
-                /*TimeSpan ts = myMedEle.Position;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(ts.Hours + ":");
-                sb.Append(ts.Minutes + ":");
-                sb.Append(ts.Seconds);*/
-                //  txtPosition.Text = sb.ToString();
-
             }
         }
 
@@ -223,6 +229,7 @@ namespace TestUserControl
         {
             pause = true;
             TextPlay = "|>";
+
             myMedElem.Source = new Uri(path);
         }
 
@@ -230,7 +237,6 @@ namespace TestUserControl
         {
             if (myMedElem.IsLoaded == true)
             {
-
                 if (pause == true)
                 {
                     myMedElem.Play();

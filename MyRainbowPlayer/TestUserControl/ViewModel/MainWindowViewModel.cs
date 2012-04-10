@@ -53,7 +53,7 @@ namespace TestUserControl
             this.TimeViewModel = new ucTimeModel(db);
             this.PlaylistViewModel = new ucPlaylistModel(db);
 
-            db.addSound("tamaman");
+           /* db.addSound("tamaman");
             db.addSound("tapapa");
             db.addSound("tachien");
             db.addSound("tachat");
@@ -61,17 +61,23 @@ namespace TestUserControl
             db.addPicture("toncul");
             db.addPicture("toncul");
             db.addPicture("et toncul");
-            db.SaveSoundB();
+            dB.SaveSoundB();*/
+            db.LoadSoundB();
             this.PlaylistViewModel.MediaChanged += new EventHandler<MediaChangedEventArgs>(lib_MediaChanged);
         }
 
+
+        public void aboutToClose(object sender, EventArgs e)
+        {
+
+        }
 
         void lib_MediaChanged(object sender, MediaChangedEventArgs e)
         {
             MyIndexTab = 0;
 
-           // db.addCurrent(e.NewMedia.path);
             this._timeViewModel.loadPath(e.NewMedia.path);
+            
         }
 
         private void PlayList_Loaded(object sender, RoutedEventArgs e)

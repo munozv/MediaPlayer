@@ -23,6 +23,10 @@ namespace TestUserControl
         public String path { get; set; }
         public uint kbsize { get; set; }
         public eMediaType type { get; set; }
+        public String width { get; set; }
+        public String height { get; set; }
+        public String date { get; set; }
+        public String copyright { get; set; }
     }
 
     public class myPicture : Media

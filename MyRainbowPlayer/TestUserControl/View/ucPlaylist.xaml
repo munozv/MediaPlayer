@@ -57,9 +57,18 @@
                         <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Playlist, Path=SelectedItem}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <TreeViewItem x:Name="itemCurrent" Header="Current List" />
-                <TreeViewItem x:Name="itemPlaylist" Header="Playlist" IsExpanded="True" Background="#00000000" GotFocus="PlaylistFocus">
-                    <TreeViewItem Header="Default Playlist"  />
+                <TreeViewItem x:Name="itemCurrent" Header="Current Playlist" />
+                <TreeViewItem Header="Playlists" Name="treeView1" ItemsSource="{Binding dico,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=treeView1, Path=SelectedItem}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <TreeViewItem.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Key}"/>
+                        </DataTemplate>
+                    </TreeViewItem.ItemTemplate>
                 </TreeViewItem>
                 <TreeViewItem x:Name="itemMusics" Header="Musics" IsExpanded="True">
                     <TreeViewItem Header="Artist" GotFocus="ArtistFocus"/>
@@ -68,7 +77,7 @@
                 </TreeViewItem>
                 <TreeViewItem x:Name="itemsPictures" Header="Pictures" GotFocus="PicturesFocus"/>
                 <TreeViewItem x:Name="itemsVideos" Header="Videos" GotFocus="VideosFocus"/>
-             </TreeView>
+            </TreeView>
 
         </Grid>
         <DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0"   ItemsSource="{Binding mediaList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  d:LayoutOverrides="GridBox" IsReadOnly="True" >
