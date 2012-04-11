@@ -1,15 +1,15 @@
 ﻿TestUserControl
 
 
-exe
+winexe
 C#
 .cs
-C:\Users\munoz_v\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\obj\Debug\
+C:\Users\munoz_v\Desktop\MediaPlayer3\MyRainbowPlayer\TestUserControl\obj\Debug\
 TestUserControl
 none
 false
 DEBUG;TRACE
-C:\Users\munoz_v\Desktop\MediaPlayer\MyRainbowPlayer\TestUserControl\View\App.xaml
+C:\Users\munoz_v\Desktop\MediaPlayer3\MyRainbowPlayer\TestUserControl\View\App.xaml
 10-300572801
 1-1076236598
 2481383787017

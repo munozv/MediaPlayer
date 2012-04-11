@@ -6,4 +6,8 @@
     <copyright>© 2008 Microsoft Corporation</copyright>
     <type>PICTURE</type>
   </Media>
+  <Media>
+    <path>C:\Users\munoz_v\Videos\mlp.mp4</path>
+    <type>PICTURE</type>
+  </Media>
 </ArrayOfMedia>

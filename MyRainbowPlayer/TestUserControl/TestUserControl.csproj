@@ -6,7 +6,7 @@
     <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B3BD87DB-F2EF-41EF-BFA5-ACEF775ED694}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <DefaultClrNameSpace>TestUserControl</DefaultClrNameSpace>
     <RootNamespace>TestUserControl</RootNamespace>

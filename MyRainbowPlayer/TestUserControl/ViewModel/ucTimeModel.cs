@@ -63,7 +63,6 @@ namespace TestUserControl
             ShuffleCommand = new DelegateCommand(doShuffle, CanShuffle);
             StopCommand = new DelegateCommand(doStop, CanStop);
             RepeatCommand = new DelegateCommand(doRepeat, CanRepeat);
-            //   Fullscreen = new DelegateCommand(doFullscreen, CanFullscreen);
         }
 
         public ICommand Fullscreen
@@ -72,29 +71,6 @@ namespace TestUserControl
         public bool CanFullscreen()
         {
             return true;
-        }
-
-        public void doFullscreen(object param)
-        {
-            /*
-            if (!fullScreen)
-            {
-                ucTime lol = new ucTime();
-                lol.DataContext = this;
-                lol.MedElem = myMedElem;
-                this.Content = lol;
-                this.WindowStyle = WindowStyle.None;
-                this.WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                this.Content = myGrid;
-                gridroot.Children.Add(medElem);
-                this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.WindowState = WindowState.Normal;
-            }
-            fullScreen = !fullScreen;
-             */
         }
 
         public void setTimer()
