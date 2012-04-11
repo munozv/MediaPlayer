@@ -104,6 +104,12 @@ namespace TestUserControl
 
         public void addPlaylist(String str)
         {
+            foreach (KeyValuePair<String, ObservableCollection<Media>> entry in playlists)
+            {
+                if (entry.Key == str)
+                    return;
+            }
+
             playlists.Add(str, new ObservableCollection<Media>(listCurrent));
         }
 
@@ -151,11 +157,6 @@ namespace TestUserControl
                 }
             }
             return (new List<Media>());
-        }
-
-        public void addInLibrary(Media newMed)
-        {
-
         }
 
         public void addSound(String path)

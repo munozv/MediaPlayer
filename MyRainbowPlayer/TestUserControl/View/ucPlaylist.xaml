@@ -6,7 +6,8 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 	mc:Ignorable="d"
 	x:Class="TestUserControl.ucPlaylist"
-	x:Name="UserControl" Width="496" Height="277">
+	x:Name="UserControl" Width="496" Height="277"
+    >
     <UserControl.Resources>
         <Storyboard x:Key="OnMouseEnter1">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="rectangle">
@@ -58,17 +59,12 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <TreeViewItem x:Name="itemCurrent" Header="Current Playlist" />
-                <TreeViewItem Header="Playlists" Name="treeView1" ItemsSource="{Binding Path=dico, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
+                <TreeViewItem Header="Playlists" Name="treeView1" ItemsSource="{Binding Path=listdico, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
                             <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=treeView1, Path=SelectedItem}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <TreeViewItem.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Key}"/>
-                        </DataTemplate>
-                    </TreeViewItem.ItemTemplate>
                 </TreeViewItem>
                 <TreeViewItem x:Name="itemMusics" Header="Musics" IsExpanded="True">
                     <TreeViewItem Header="Artist" GotFocus="ArtistFocus"/>
@@ -94,17 +90,10 @@
             <Menu x:Name="Menu" FontFamily="Lucida Console" Height="20" VerticalAlignment="Top" Margin="8,2,0,0" Background="{x:Null}" Foreground="Black">
                 <MenuItem x:Name="File" Header="File" Background="{x:Null}"  >
                     <MenuItem x:Name="Open" Header="Open A Media" Background="#FFBED3EB" Command="{Binding OpenFile}" />
-                    <MenuItem x:Name="OpenDir" Header="Open Directory" Background="#FFBED3EB" />
                     <MenuItem x:Name="CreatePlaylist" Header="Create Playlist" Background="#FFBED3EB" Visibility="{Binding createVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Command="{Binding CreatePlaylist}"/>
                 </MenuItem>
-                <MenuItem x:Name="Play" Header="Play">
-                    <MenuItem x:Name="PlayAndPause" Header="Play / Pause" Background="#FFBED3EB" />
-                    <MenuItem x:Name="StopButton" Header="Stop" Background="#FFBED3EB" />
-                    <MenuItem x:Name="ShuffleButton" Header="Shuffle" Background="#FFBED3EB" />
-                    <MenuItem x:Name="LoopButton" Header="Loop" Background="#FFBED3EB" />
-                </MenuItem>
                 <MenuItem x:Name="Help" Header="Help">
-                    <MenuItem x:Name="About" Header="About MyLittlePlayer" Background="#FFBED3EB" />
+                    <MenuItem x:Name="About" Header="About MyLittlePlayer" Command="{Binding affAbout}" Background="#FFBED3EB" />
                 </MenuItem>
             </Menu>
         </Grid>

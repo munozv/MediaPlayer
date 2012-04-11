@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,11 +6,12 @@
 	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
 	mc:Ignorable="d"
 	x:Class="TestUserControl.AboutUs"
-	x:Name="UserControl" Height="190.5" Width="365">
+    ResizeMode="NoResize"
+	x:Name="UserControl" Height="220.5" Width="365">
 
 	<Grid x:Name="LayoutRoot">
-		<Rectangle Fill="#FF9EDBF8" Margin="-1,-1,0,0" Stroke="Black" StrokeThickness="0"/>
-		<Image Margin="-29.642,46.993,206.732,46.051" Source="logoRainbow.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="VerticalAlignment">
+		<Rectangle Fill="#FF9EDBF8" Margin="-16,-11,-13,-14" Stroke="Black" StrokeThickness="0"/>
+		<Image Margin="-28,53,205,40" Source="logoRainbow.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" d:LayoutOverrides="VerticalAlignment">
 			<Image.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -21,6 +22,6 @@
 			</Image.RenderTransform>
 		</Image>
 		<GroupBox Header="My Little Pony Player" Margin="124.667,21.5,31.167,0" Height="143.45" VerticalAlignment="Top" FontFamily="Lucida Console"/>
-		<TextBlock Margin="137.333,54.667,44.333,31.833" TextWrapping="Wrap" FontFamily="Lucida Console"><Run Language="fr-fr" Text="Let's write some sh*tty things about pony, media players... Pony pony pony yay ! Also The game. Friday Friday Let's get DOWN on Fridaaaaay."/></TextBlock>
+		<TextBlock Margin="137.333,54.667,44.333,0" TextWrapping="Wrap" FontFamily="Lucida Console"><Run Language="fr-fr" Text="Created by Bideau_s, Munoz_v, Sylvai_n, Moutaw_i.                 A full MVVM Media Player, powered by My Little Pony!!! "/></TextBlock>
 	</Grid>
-</UserControl>
+</Window>

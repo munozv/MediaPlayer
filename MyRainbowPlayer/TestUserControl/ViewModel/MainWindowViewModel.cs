@@ -63,7 +63,6 @@ namespace TestUserControl
 
         public void aboutToClose(object sender, EventArgs e)
         {
-            Console.WriteLine("about to close");
             db.SaveB();
             XmlSerializer xse = new XmlSerializer(typeof(Dictionary<string, ObservableCollection<Media>>));
             FileStream fs = new FileStream("playlists.xml", FileMode.Create);

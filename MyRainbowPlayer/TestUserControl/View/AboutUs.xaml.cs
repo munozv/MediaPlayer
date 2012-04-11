@@ -16,7 +16,7 @@ namespace TestUserControl
 	/// <summary>
 	/// Interaction logic for AboutUs.xaml
 	/// </summary>
-	public partial class AboutUs : UserControl
+	public partial class AboutUs : Window
 	{
 		public AboutUs()
 		{

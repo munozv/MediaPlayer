@@ -59,6 +59,11 @@ namespace TestUserControl
 			// TODO: Add event handler implementation here.
 		}
 
+        private void UserControl_Drop(object sender, DragEventArgs e)
+        {
+
+        }
+
      
 	}
 }

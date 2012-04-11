@@ -32,7 +32,8 @@ namespace TestUserControl
         { get; set; }
         public ICommand CreatePlaylist
         { get; set; }
-
+        public ICommand affAbout
+        { get; set; }
 
         public bool CanOpenFile()
         {
@@ -50,6 +51,10 @@ namespace TestUserControl
         }
 
         private bool CanChangeList()
+        {
+            return true;
+        }
+        private bool CanAffAbout()
         {
             return true;
         }
@@ -73,11 +78,12 @@ namespace TestUserControl
             get { return _createVisibility; }
             set { _createVisibility = value; OnPropertyChanged("createVisibility"); }
         }
-        private Dictionary<String, ObservableCollection<Media>> _dico;
-        public Dictionary<String, ObservableCollection<Media>> dico
+
+        private List<String> _listdico;
+        public List<String> listdico
         {
-            get { return _dico; }
-            set { _dico = value; OnPropertyChanged("dico"); }
+            get { return _listdico; }
+            set { _listdico = value; OnPropertyChanged("listdico"); }
         }
         public eMediaType Listdata;
 
@@ -90,8 +96,26 @@ namespace TestUserControl
             Listdata = eMediaType.MUSIC;
             //            mediaList = new ObservableCollection<Media>(db.ListCurrent);
             CreatePlaylist = new DelegateCommand(doCreateList, CanCreateList);
-            dico = db.playlists;
+            affAbout = new DelegateCommand(doAffAbout, CanAffAbout);
             islinqRequest = false;
+            Actualizedico();
+        }
+
+        public void doAffAbout(object param)
+        {
+            AboutUs window = new AboutUs();
+            window.Title = "About Us";
+            window.ShowDialog();
+        }
+
+        public void Actualizedico()
+        {
+            listdico = new List<string>();
+            foreach (KeyValuePair<String, ObservableCollection<Media>> entry in db.playlists)
+            {
+                listdico.Add(entry.Key);
+            }
+            OnPropertyChanged("listdico");
         }
 
         public bool CanRequestFocus()
@@ -119,7 +143,7 @@ namespace TestUserControl
             window.Title = "Create a New Playlist";
             window.ShowDialog();
             db.addPlaylist(npm.text);
-            dico = db.playlists;
+            Actualizedico();
         }
 
         private bool islinqRequest;
@@ -130,9 +154,19 @@ namespace TestUserControl
             islinqRequest = false;
             if (tv == null)
             {
-                KeyValuePair<String, ObservableCollection<Media>> di = (KeyValuePair<String, ObservableCollection<Media>>)param;
+                String s = param as String;
+                var v = from entry in db.playlists
+                        where (entry.Key == s)
+                        select entry;
+
+//                KeyValuePair<String, ObservableCollection<Media>> di = (KeyValuePair<String, ObservableCollection<Media>>)param;
                 Listdata = eMediaType.ALL;
-                mediaList = new ObservableCollection<Media>(di.Value);
+                foreach (KeyValuePair<String, ObservableCollection<Media>> r in v)
+                {
+                    mediaList = new ObservableCollection<Media>(r.Value);
+                    return;
+                }
+//                mediaList = new ObservableCollection<Media>();
             }
             else
             {
