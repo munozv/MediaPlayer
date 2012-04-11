@@ -35,6 +35,7 @@ namespace TestUserControl
             this.Timer.MediaSlider1.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(vm.TimeViewModel.sldTimeLine_PreviewMouseLeftButtonDown);
             this.Timer.MediaSlider1.PreviewMouseLeftButtonUp += new MouseButtonEventHandler(vm.TimeViewModel.sldTimeLine_PreviewMouseLeftButtonUp);
             this.Window.Closed +=new EventHandler(vm.aboutToClose);
+            
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using System.Windows;
 using System.IO;
 using System.Reflection;
+using System.Collections.ObjectModel;
 
 namespace TestUserControl
 {
@@ -75,23 +76,25 @@ namespace TestUserControl
 
         public void doFullscreen(object param)
         {
-            /*            if (!fullScreen)
-                        {
-                            ucTime lol = new ucTime();
-                            lol.DataContext = this;
-                            lol.MedElem = myMedElem;
-                            this.Content = lol;
-                            this.WindowStyle = WindowStyle.None;
-                            this.WindowState = WindowState.Maximized;
-                        }
-                        else
-                        {
-                            this.Content = myGrid;
-                            gridroot.Children.Add(medElem);
-                            this.WindowStyle = WindowStyle.SingleBorderWindow;
-                            this.WindowState = WindowState.Normal;
-                        }
-                        fullScreen = !fullScreen;*/
+            /*
+            if (!fullScreen)
+            {
+                ucTime lol = new ucTime();
+                lol.DataContext = this;
+                lol.MedElem = myMedElem;
+                this.Content = lol;
+                this.WindowStyle = WindowStyle.None;
+                this.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                this.Content = myGrid;
+                gridroot.Children.Add(medElem);
+                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                this.WindowState = WindowState.Normal;
+            }
+            fullScreen = !fullScreen;
+             */
         }
 
         public void setTimer()
@@ -101,6 +104,7 @@ namespace TestUserControl
             DTimer.Tick += new EventHandler(DTimer_Tick);
             DTimer.Start();
             this.myMedElem.MediaOpened += new RoutedEventHandler(myMedOpened);
+            this.myMedElem.MediaEnded += new RoutedEventHandler(myMedNext);
         }
         public ICommand PlayCommand
         { get; set; }
@@ -136,9 +140,14 @@ namespace TestUserControl
             MyMediaElement = parmMediaElement;
         }
 
+        private void myMedNext(object sender, RoutedEventArgs e)
+        {
+            doNext(null);
+        }
+
         private void myMedOpened(object sender, RoutedEventArgs e)
         {
-            if (mediatype != eMediaType.PICTURE)
+            if (mediatype != eMediaType.PICTURE && myMedElem.Source != null)
                 MaxSlidValue = myMedElem.NaturalDuration.TimeSpan.TotalMilliseconds;
         }
         private bool CanMediaOpened(object param)
@@ -207,19 +216,18 @@ namespace TestUserControl
             myMedElem.Volume = s.Value;
         }
 
+        private int nb;
         public eMediaType mediatype;
-        public void loadPath(String path)
+        private ObservableCollection<Media> listinCurr;
+        public void loadPath(String path, int _nb, ObservableCollection<Media> _listinCurr)
         {
             pause = true;
             TextPlay = "|>";
-
+            listinCurr = _listinCurr;
             try
             {
-
                 TagLib.File tagfile = TagLib.File.Create(path);
-
                 String artist = tagfile.Tag.FirstArtist;
-                Console.WriteLine("artist is " + artist);
                 TagLib.Properties p = tagfile.Properties;
                 TagLib.MediaTypes mt = p.MediaTypes;
                 if (mt == TagLib.MediaTypes.Audio)
@@ -227,6 +235,7 @@ namespace TestUserControl
                     mediatype = eMediaType.SOUND;
                     db.addSound(path);
                     myMedElem.Source = new Uri(path);
+                    nb = _nb;
                 }
                 else if (mt == TagLib.MediaTypes.Photo)
                 {
@@ -237,12 +246,14 @@ namespace TestUserControl
                     pause = false;
                     TextPlay = "||";
                     myMedElem.Play();
+                    nb = _nb;
                 }
                 else if ((p.MediaTypes & TagLib.MediaTypes.Video) != TagLib.MediaTypes.None)
                 {
                     mediatype = eMediaType.VIDEO;
                     db.addVideo(path);
                     myMedElem.Source = new Uri(path);
+                    nb = _nb;
                 }
             }
             catch (TagLib.UnsupportedFormatException e)
@@ -293,7 +304,7 @@ namespace TestUserControl
 
         private void doRepeat(object param)
         {
-            Console.WriteLine("I do a Repeat");
+            nb = nb - 1;
         }
 
         private bool CanShuffle()
@@ -303,7 +314,12 @@ namespace TestUserControl
 
         private void doShuffle(object param)
         {
-            Console.WriteLine("I do a shuffle");
+            if (listinCurr != null)
+            {
+                Random r = new Random();
+
+                nb = r.Next() % listinCurr.Count;
+            }
         }
 
         private bool CanPrev()
@@ -313,7 +329,14 @@ namespace TestUserControl
 
         private void doPrev(object param)
         {
+            if (listinCurr != null)
+            {
+                ObservableCollection<Media> lm = listinCurr;
 
+                Media m = lm.ElementAtOrDefault<Media>(nb - 1);
+                if (m != null)
+                    loadPath(m.path, nb - 1, listinCurr);
+            }
         }
 
         private bool CanNext()
@@ -323,7 +346,14 @@ namespace TestUserControl
 
         private void doNext(object param)
         {
+            if (listinCurr != null)
+            {
+                ObservableCollection<Media> lm = listinCurr;
 
+                Media m = lm.ElementAtOrDefault<Media>(nb + 1);
+                if (m != null)
+                    loadPath(m.path, nb + 1, listinCurr);
+            }
         }
 
     }

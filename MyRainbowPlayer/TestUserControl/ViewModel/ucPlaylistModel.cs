@@ -26,6 +26,8 @@ namespace TestUserControl
 
         public ICommand MusicsFocusCommand
         { get; set; }
+        public ICommand RequestFocusCommand
+        { get; set; }
         public ICommand OpenFile
         { get; set; }
         public ICommand CreatePlaylist
@@ -65,41 +67,42 @@ namespace TestUserControl
                 OnPropertyChanged("mediaList");
             }
         }
-
         private Visibility _createVisibility;
         public Visibility createVisibility
         {
             get { return _createVisibility; }
             set { _createVisibility = value; OnPropertyChanged("createVisibility"); }
         }
-
         private Dictionary<String, ObservableCollection<Media>> _dico;
-
         public Dictionary<String, ObservableCollection<Media>> dico
         {
             get { return _dico; }
             set { _dico = value; OnPropertyChanged("dico"); }
         }
-
         public eMediaType Listdata;
+
         public ucPlaylistModel(DatabasePlaylist ddb)
         {
             db = ddb;
             MusicsFocusCommand = new DelegateCommand(doListFocus, CanListFocus);
+            RequestFocusCommand = new DelegateCommand(doRequestFocus, CanRequestFocus);
             OpenFile = new DelegateCommand(doOpenFile, CanOpenFile);
             Listdata = eMediaType.MUSIC;
-//            mediaList = new ObservableCollection<Media>(db.ListCurrent);
+            //            mediaList = new ObservableCollection<Media>(db.ListCurrent);
             CreatePlaylist = new DelegateCommand(doCreateList, CanCreateList);
             dico = db.playlists;
-            Media m = new Media();
-            m.artist = "lol";
-            m.path = "coucou";
-            ObservableCollection<Media> oc = new ObservableCollection<Media>();
-            oc.Add(m);
-            dico.Add("test", oc);
-            dico.Add("test2", oc);
+            islinqRequest = false;
         }
 
+        public bool CanRequestFocus()
+        {
+            return true;
+        }
+
+        public void doRequestFocus(object param)
+        {
+
+        }
         public void setVisibilityCreate(object param, RoutedEventArgs e)
         {
             if (db.ListCurrent.Count() != 0)
@@ -115,13 +118,16 @@ namespace TestUserControl
             window.DataContext = npm;
             window.Title = "Create a New Playlist";
             window.ShowDialog();
-            Console.WriteLine("Playlist name = " + npm.text);
             db.addPlaylist(npm.text);
+            dico = db.playlists;
         }
 
+        private bool islinqRequest;
+        private String medRequest;
         private void doListFocus(object param)
         {
             TreeViewItem tv = param as TreeViewItem;
+            islinqRequest = false;
             if (tv == null)
             {
                 KeyValuePair<String, ObservableCollection<Media>> di = (KeyValuePair<String, ObservableCollection<Media>>)param;
@@ -131,7 +137,6 @@ namespace TestUserControl
             else
             {
                 String header = tv.Header.ToString();
-                Console.WriteLine("header is " + header); 
                 if (header == "Current Playlist")
                 {
                     Listdata = eMediaType.ALL;
@@ -152,6 +157,62 @@ namespace TestUserControl
                     Listdata = eMediaType.VIDEOS;
                     mediaList = new ObservableCollection<Media>(db.ListVideo);
                 }
+                #region linq_request
+                else if (header == "Artist")
+                {
+                    var stuff = from entry in db.ListSound
+                                group entry by entry.artist
+                                    into g
+                                    select new { Remainder = g.Key };
+                    ObservableCollection<Media> ocm = new ObservableCollection<Media>();
+                    foreach (var g in stuff)
+                    {
+                        Media m = new Media();
+                        m.artist = g.Remainder;
+                        m.type = TestUserControl.eMediaType.SOUND;
+                        ocm.Add(m);
+                        mediaList = ocm;
+                    }
+                    islinqRequest = true;
+                    medRequest = "Artist";
+                }
+                else if (header == "Genre")
+                {
+                    var stuff = from entry in db.ListSound
+                                group entry by entry.genre
+                                    into g
+                                    select new { Remainder = g.Key };
+                    ObservableCollection<Media> ocm = new ObservableCollection<Media>();
+                    foreach (var g in stuff)
+                    {
+                        Media m = new Media();
+                        m.genre = g.Remainder;
+                        m.type = TestUserControl.eMediaType.SOUND;
+                        ocm.Add(m);
+                        mediaList = ocm;
+                    }
+                    islinqRequest = true;
+                    medRequest = "Genre";
+                }
+                else if (header == "Album")
+                {
+                    var stuff = from entry in db.ListSound
+                                group entry by entry.album
+                                    into g
+                                    select new { Remainder = g.Key };
+                    ObservableCollection<Media> ocm = new ObservableCollection<Media>();
+                    foreach (var g in stuff)
+                    {
+                        Media m = new Media();
+                        m.album = g.Remainder;
+                        m.type = TestUserControl.eMediaType.SOUND;
+                        ocm.Add(m);
+                        mediaList = ocm;
+                    }
+                    islinqRequest = true;
+                    medRequest = "Album";
+                }
+                #endregion
             }
         }
 
@@ -166,7 +227,6 @@ namespace TestUserControl
             {
                 chemin = fenetre.FileName;
                 db.addCurrent(chemin);
-                Console.WriteLine("chemin is " + chemin);
                 mediaList = new ObservableCollection<Media>(db.ListCurrent);
             }
         }
@@ -175,19 +235,56 @@ namespace TestUserControl
         {
             DataGrid myplay = (DataGrid)sender;
 
-            if (myplay.SelectedItem != null)
+
+            if (islinqRequest == true)
             {
                 Media med = (Media)myplay.SelectedItem;
-                Console.WriteLine("med.path = " + med.path);
+                if (medRequest == "Artist")
+                {
+                    var stuff = from entry in db.ListSound
+                                where (entry.artist == med.artist)
+                                select entry;
+                    List<Media> nwList = new List<Media>();
+                    foreach (Media m in stuff)
+                        nwList.Add(m);
+                    mediaList = new ObservableCollection<Media>(nwList);
+                }
+                else if (medRequest == "Album")
+                {
+                    var stuff = from entry in db.ListSound
+                                where (entry.album == med.album)
+                                select entry;
+                    List<Media> nwList = new List<Media>();
+                    foreach (Media m in stuff)
+                        nwList.Add(m);
+                    mediaList = new ObservableCollection<Media>(nwList);
+                }
+                else if (medRequest == "Genre")
+                {
+                    var stuff = from entry in db.ListSound
+                                where (entry.genre == med.genre)
+                                select entry;
+                    List<Media> nwList = new List<Media>();
+                    foreach (Media m in stuff)
+                        nwList.Add(m);
+                    mediaList = new ObservableCollection<Media>(nwList);
+                }
+
+            }
+            else if (myplay.SelectedItem != null)
+            {
+                Media med = (Media)myplay.SelectedItem;
                 db.currentPath = med.path;
                 e.Handled = true;
-                OnMediaChanged(med);
+                OnMediaChanged(med, myplay.SelectedIndex, mediaList);
             }
         }
-        public void OnMediaChanged(Media MediaSource)
+
+
+        public void OnMediaChanged(Media MediaSource, int n, ObservableCollection<Media> t)
         {
             if (MediaChanged != null)
-                MediaChanged(this, new MediaChangedEventArgs(MediaSource));
+                MediaChanged(this, new MediaChangedEventArgs(MediaSource, n, t));
         }
         public event EventHandler<MediaChangedEventArgs> MediaChanged;
 

@@ -5,6 +5,9 @@ using System.Text;
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Input;
+using System.Xml.Serialization;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace TestUserControl
 {
@@ -62,14 +65,16 @@ namespace TestUserControl
         {
             Console.WriteLine("about to close");
             db.SaveB();
+            XmlSerializer xse = new XmlSerializer(typeof(Dictionary<string, ObservableCollection<Media>>));
+            FileStream fs = new FileStream("playlists.xml", FileMode.Create);
+
+            xse.Serialize(fs, db.playlists);
         }
 
         void lib_MediaChanged(object sender, MediaChangedEventArgs e)
         {
             MyIndexTab = 0;
-
-            this._timeViewModel.loadPath(e.NewMedia.path);
-            
+            this._timeViewModel.loadPath(e.NewMedia.path, e.nb, e.l);
         }
 
         private void PlayList_Loaded(object sender, RoutedEventArgs e)
@@ -82,22 +87,6 @@ namespace TestUserControl
 
         }
 
-        private void MenuBar_Clicked(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog fenetre = new OpenFileDialog();
-
-            fenetre.Filter = "All Files (*.*)|*.*";
-            fenetre.Title = "Select your files      ";
-
-            if (fenetre.ShowDialog() == true)
-            {
-                chemin = fenetre.FileName;
-                Console.WriteLine(chemin);
-                //medElem.Source = new Uri(chemin);
-                mediaLoaded = true;
-                pause = true;
-            }
-        }
-
+       
     }
 }

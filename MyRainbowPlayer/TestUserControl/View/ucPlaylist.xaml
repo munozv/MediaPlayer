@@ -58,7 +58,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <TreeViewItem x:Name="itemCurrent" Header="Current Playlist" />
-                <TreeViewItem Header="Playlists" Name="treeView1" ItemsSource="{Binding dico,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
+                <TreeViewItem Header="Playlists" Name="treeView1" ItemsSource="{Binding Path=dico, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedItemChanged">
                             <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=treeView1, Path=SelectedItem}"/>

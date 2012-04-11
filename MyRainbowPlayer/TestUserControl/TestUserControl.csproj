@@ -64,7 +64,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MediaClass.cs" />
     <Compile Include="TagLib\TagLib\Aac\AudioHeader.cs" />
     <Compile Include="TagLib\TagLib\Aac\BitStream.cs" />
     <Compile Include="TagLib\TagLib\Aac\File.cs" />

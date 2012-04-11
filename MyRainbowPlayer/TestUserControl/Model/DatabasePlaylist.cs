@@ -21,7 +21,6 @@ namespace TestUserControl
             {
                 _curPath = value;
                 OnPropertyChanged("currentPath");
-                Console.WriteLine("_curPath = " + _curPath);
             }
         }
 
@@ -48,32 +47,6 @@ namespace TestUserControl
                 media.type = eMediaType.VIDEO;
             listCurrent.Add(media);
         }
-        private List<Media> listCurrent;
-        public List<Media> ListCurrent
-        {
-            get { return listCurrent; }
-            set { listCurrent = value; }
-        }
-
-
-        private List<Media> listPicture;
-        public List<Media> ListPicture
-        {
-            get { return listPicture; }
-            set { listPicture = value; }
-        }
-        private List<Media> listSound;
-        public List<Media> ListSound
-        {
-            get { return listSound; }
-            set { listSound = value; }
-        }
-        private List<Media> listVideo;
-        public List<Media> ListVideo
-        {
-            get { return listVideo; }
-            set { listVideo = value; }
-        }
 
         public DatabasePlaylist()
         {
@@ -85,51 +58,76 @@ namespace TestUserControl
             createDico();
         }
 
+
         public Dictionary<String, ObservableCollection<Media>> playlists;
 
         public void createDico()
         {
             playlists = new Dictionary<string, ObservableCollection<Media>>();
+            DirectoryInfo di = new DirectoryInfo("playlists/");
+            FileInfo[] rgFiles = di.GetFiles("*.xml");
+            foreach (FileInfo fi in rgFiles)
+            {
+                XmlSerializer xse = new XmlSerializer(typeof(ObservableCollection<Media>));
+                string directory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                string filePath = Path.Combine(directory, fi.FullName);
+
+                if (File.Exists(fi.FullName) == true)
+                {
+                    FileStream fs = new FileStream(fi.FullName, FileMode.Open);
+                    if (fs.CanRead == true)
+                    {
+                        try
+                        {
+                            playlists.Add(fi.Name.Remove(fi.Name.Length - 4, 4), (ObservableCollection<Media>)xse.Deserialize(fs));
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+                    }
+                }
+             }        
+        }
+
+        public void savedico()
+        {
+            foreach (KeyValuePair<String, ObservableCollection<Media>> entry in playlists)
+            {
+                XmlSerializer xse = new XmlSerializer(typeof(ObservableCollection<Media>));
+                FileStream fs = new FileStream("playlists/" + entry.Key + ".xml", FileMode.Create);
+
+                xse.Serialize(fs, entry.Value);
+            }
 
         }
 
         public void addPlaylist(String str)
         {
             playlists.Add(str, new ObservableCollection<Media>(listCurrent));
-
-            var stuff = from entry in listSound
-                        where (entry.artist == "test")
-                        select entry;
-            Console.WriteLine("stuff is a " + stuff.ToString());
-            foreach (Media med in stuff)
-            {
-                Console.WriteLine("one media " + med.artist);
-            }
         }
 
+        
         public void SaveB()
         {
             savemedia("songs.xml", listSound);
             savemedia("pictures.xml", ListPicture);
             savemedia("videos.xml", ListVideo);
+            savedico();
         }
-
         public void savemedia(String s, List<Media> list)
         {
             XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
             FileStream fs = new FileStream(s, FileMode.Create);
 
-            Console.WriteLine("count is " + list.Count);
             xse.Serialize(fs, list);
         }
-
         public void LoadB()
         {
             ListSound = Loadmedia("songs.xml", ListSound);
             ListPicture = Loadmedia("pictures.xml", ListPicture);
             ListVideo = Loadmedia("videos.xml", ListVideo);
-         }
-
+        }
         public List<Media> Loadmedia(String s, List<Media> list)
         {
             XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
@@ -147,15 +145,13 @@ namespace TestUserControl
                         return (list);
                     }
                     catch (Exception e)
-                    {                        
+                    {
 
                     }
                 }
             }
-            return(new List<Media>());
+            return (new List<Media>());
         }
-
-
 
         public void addInLibrary(Media newMed)
         {
@@ -186,10 +182,6 @@ namespace TestUserControl
             media.copyright = tagfile.Tag.Copyright;
 
             listSound.Add(media);
-        }
-        public void deleteSound(Media it)
-        {
-            listSound.Remove(it);
         }
         public void addVideo(String path)
         {
@@ -243,5 +235,32 @@ namespace TestUserControl
 
             ListPicture.Add(media);
         }
+
+        private List<Media> listCurrent;
+        public List<Media> ListCurrent
+        {
+            get { return listCurrent; }
+            set { listCurrent = value; }
+        }
+        private List<Media> listPicture;
+        public List<Media> ListPicture
+        {
+            get { return listPicture; }
+            set { listPicture = value; }
+        }
+        private List<Media> listSound;
+        public List<Media> ListSound
+        {
+            get { return listSound; }
+            set { listSound = value; }
+        }
+        private List<Media> listVideo;
+        public List<Media> ListVideo
+        {
+            get { return listVideo; }
+            set { listVideo = value; }
+        }
+
     }
+
 }
