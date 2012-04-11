@@ -5,7 +5,10 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
 	x:Class="TestUserControl.MainWindow"
 	x:Name="Window"
-	Title="MyLittlePlayer" Background="#FFC5D4EB" ResizeMode="CanResize" Cursor="Arrow" Visibility="Visible" Width="695" Height="593.221" Icon="icons.gif">
+	Title="MyLittlePlayer" Background="#FFC5D4EB"
+    MinHeight="300"
+    MinWidth="690"
+ ResizeMode="CanResize" Cursor="Arrow" Visibility="Visible" Width="695" Height="593.221" Icon="icons.gif">
     <Grid x:Name="myGrid" Margin="0,0,2,0">
         <Grid.RowDefinitions>
   
