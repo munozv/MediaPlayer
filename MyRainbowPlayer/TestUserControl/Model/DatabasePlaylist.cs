@@ -64,6 +64,7 @@ namespace TestUserControl
         public void createDico()
         {
             playlists = new Dictionary<string, ObservableCollection<Media>>();
+            Directory.CreateDirectory("playlists/");
             DirectoryInfo di = new DirectoryInfo("playlists/");
             FileInfo[] rgFiles = di.GetFiles("*.xml");
             foreach (FileInfo fi in rgFiles)
@@ -214,7 +215,7 @@ namespace TestUserControl
         {
             Media media = new Media();
 
-            var stuff = from entry in listVideo
+            var stuff = from entry in listPicture
                         where (entry.path == path)
                         select entry;
 

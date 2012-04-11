@@ -221,44 +221,47 @@ namespace TestUserControl
         private ObservableCollection<Media> listinCurr;
         public void loadPath(String path, int _nb, ObservableCollection<Media> _listinCurr)
         {
-            pause = true;
-            TextPlay = "|>";
-            listinCurr = _listinCurr;
-            try
+            if (File.Exists(path))
             {
-                TagLib.File tagfile = TagLib.File.Create(path);
-                String artist = tagfile.Tag.FirstArtist;
-                TagLib.Properties p = tagfile.Properties;
-                TagLib.MediaTypes mt = p.MediaTypes;
-                if (mt == TagLib.MediaTypes.Audio)
+                pause = true;
+                TextPlay = "|>";
+                listinCurr = _listinCurr;
+                try
                 {
-                    mediatype = eMediaType.SOUND;
-                    db.addSound(path);
-                    myMedElem.Source = new Uri(path);
-                    nb = _nb;
-                }
-                else if (mt == TagLib.MediaTypes.Photo)
-                {
-                    mediatype = eMediaType.PICTURE;
-                    db.addPicture(path);
+                    TagLib.File tagfile = TagLib.File.Create(path);
+                    String artist = tagfile.Tag.FirstArtist;
+                    TagLib.Properties p = tagfile.Properties;
+                    TagLib.MediaTypes mt = p.MediaTypes;
+                    if (mt == TagLib.MediaTypes.Audio)
+                    {
+                        mediatype = eMediaType.SOUND;
+                        db.addSound(path);
+                        myMedElem.Source = new Uri(path);
+                        nb = _nb;
+                    }
+                    else if (mt == TagLib.MediaTypes.Photo)
+                    {
+                        mediatype = eMediaType.PICTURE;
+                        db.addPicture(path);
 
-                    myMedElem.Source = new Uri(path);
-                    pause = false;
-                    TextPlay = "||";
-                    myMedElem.Play();
-                    nb = _nb;
+                        myMedElem.Source = new Uri(path);
+                        pause = false;
+                        TextPlay = "||";
+                        myMedElem.Play();
+                        nb = _nb;
+                    }
+                    else if ((p.MediaTypes & TagLib.MediaTypes.Video) != TagLib.MediaTypes.None)
+                    {
+                        mediatype = eMediaType.VIDEO;
+                        db.addVideo(path);
+                        myMedElem.Source = new Uri(path);
+                        nb = _nb;
+                    }
                 }
-                else if ((p.MediaTypes & TagLib.MediaTypes.Video) != TagLib.MediaTypes.None)
+                catch (TagLib.UnsupportedFormatException e)
                 {
-                    mediatype = eMediaType.VIDEO;
-                    db.addVideo(path);
-                    myMedElem.Source = new Uri(path);
-                    nb = _nb;
-                }
-            }
-            catch (TagLib.UnsupportedFormatException e)
-            {
 
+                }
             }
         }
 

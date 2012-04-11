@@ -159,15 +159,13 @@ namespace TestUserControl
                         where (entry.Key == s)
                         select entry;
 
-//                KeyValuePair<String, ObservableCollection<Media>> di = (KeyValuePair<String, ObservableCollection<Media>>)param;
                 Listdata = eMediaType.ALL;
                 foreach (KeyValuePair<String, ObservableCollection<Media>> r in v)
                 {
                     mediaList = new ObservableCollection<Media>(r.Value);
                     return;
                 }
-//                mediaList = new ObservableCollection<Media>();
-            }
+           }
             else
             {
                 String header = tv.Header.ToString();

@@ -52,7 +52,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <TreeView x:Name="Playlist" Opacity="0.79" FontFamily="Lucida Console" HorizontalAlignment="Right" Width="200" d:LayoutOverrides="VerticalAlignment" BorderThickness="0" Background="{x:Null}" Margin="0,22,0,0">
+            <TreeView x:Name="Playlist" Opacity="0.79" FontFamily="Calibri" HorizontalAlignment="Right" Width="200" d:LayoutOverrides="VerticalAlignment" BorderThickness="0" Background="{x:Null}" Margin="0,22,0,0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectedItemChanged">
                         <i:InvokeCommandAction Command="{Binding MusicsFocusCommand}" CommandParameter="{Binding ElementName=Playlist, Path=SelectedItem}"/>
@@ -76,7 +76,7 @@
             </TreeView>
 
         </Grid>
-        <DataGrid x:Name="Tablesheet" FontFamily="Lucida Console" Margin="200,20,0,0" AlternatingRowBackground="AliceBlue" RowBackground="Azure"  ItemsSource="{Binding mediaList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  d:LayoutOverrides="GridBox" IsReadOnly="True" >
+        <DataGrid x:Name="Tablesheet" FontFamily="Calibri" Margin="200,20,0,0"  AlternatingRowBackground="AliceBlue" RowBackground="Azure"  ItemsSource="{Binding mediaList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  d:LayoutOverrides="GridBox" IsReadOnly="True" UseLayoutRounding="True">
         </DataGrid>
         <Grid x:Name="menu" Height="23" VerticalAlignment="Top">
             <Rectangle Stroke="Black" StrokeThickness="0" Margin="0,0,0,0" Height="22" VerticalAlignment="Top">
@@ -87,10 +87,10 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Menu x:Name="Menu" FontFamily="Lucida Console" Height="20" VerticalAlignment="Top" Margin="8,2,0,0" Background="{x:Null}" Foreground="Black">
+            <Menu x:Name="Menu" FontFamily="Calibri" Height="20" VerticalAlignment="Top" Margin="8,2,0,0" Background="{x:Null}" Foreground="Black">
                 <MenuItem x:Name="File" Header="File" Background="{x:Null}"  >
                     <MenuItem x:Name="Open" Header="Open A Media" Background="#FFBED3EB" Command="{Binding OpenFile}" />
-                    <MenuItem x:Name="CreatePlaylist" Header="Create Playlist" Background="#FFBED3EB" Visibility="{Binding createVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Command="{Binding CreatePlaylist}"/>
+                    <MenuItem x:Name="CreatePlaylist" Header="Create Playlist" Background="#FFBED3EB" Visibility="{Binding createVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Command="{Binding CreatePlaylist}"  />
                 </MenuItem>
                 <MenuItem x:Name="Help" Header="Help">
                     <MenuItem x:Name="About" Header="About MyLittlePlayer" Command="{Binding affAbout}" Background="#FFBED3EB" />
