@@ -5,15 +5,14 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
 	x:Class="TestUserControl.MainWindow"
 	x:Name="Window"
-	Title="MyLittlePlayer" Background="#FFC5D4EB" ResizeMode="NoResize" Cursor="Arrow" Visibility="Visible" Width="695" Height="593.221" Icon="icons.gif">
+	Title="MyLittlePlayer" Background="#FFC5D4EB" ResizeMode="CanResize" Cursor="Arrow" Visibility="Visible" Width="695" Height="593.221" Icon="icons.gif">
     <Grid x:Name="myGrid" Margin="0,0,2,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20.8"/>
-            <RowDefinition Height="544.421"/>
+  
         </Grid.RowDefinitions>
-        <TabControl SelectedIndex="{Binding Path=MyIndexTab, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="8,4,0,8" Style="{DynamicResource SimpleTabControl}" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Center" Width="666" Grid.RowSpan="2" IsSynchronizedWithCurrentItem="False"  >
+        <TabControl SelectedIndex="{Binding Path=MyIndexTab, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,0,0,0" VerticalAlignment="Stretch"  Style="{DynamicResource SimpleTabControl}" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Stretch" Grid.RowSpan="2" IsSynchronizedWithCurrentItem="False"  >
             <TabItem Header="Player"  Style="{DynamicResource SimpleTabItem}" >
-                <local:ucTime  x:Name="Timer" Margin="8,0,0,-1" Width="679" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="180.221" Grid.Row="1" d:LayoutOverrides="VerticalAlignment"/>
+                <local:ucTime Width="Auto" Height="Auto" x:Name="Timer" Margin="0,0,0,0" HorizontalAlignment="Center" Grid.Row="1" />
             </TabItem>
             <TabItem Header="Bibliotheque" Style="{DynamicResource SimpleTabItem}" >
                 <local:ucPlaylist x:Name="Playlist" Width="Auto" Height="Auto" Margin="0,0,0,0"  />

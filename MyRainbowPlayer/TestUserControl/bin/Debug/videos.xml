@@ -2,7 +2,7 @@
 <ArrayOfMedia xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Media>
     <name>Wildlife in HD</name>
-    <path>C:\Users\Public\Videos\Sample Videos\Wildlife.wmv</path>
+    <path>C:\Users\Public\Videos\Sample Videos\Wildlife2.wmv</path>
     <copyright>© 2008 Microsoft Corporation</copyright>
     <type>PICTURE</type>
   </Media>

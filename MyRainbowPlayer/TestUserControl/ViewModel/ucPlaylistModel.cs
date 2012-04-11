@@ -280,6 +280,8 @@ namespace TestUserControl
                     foreach (Media m in stuff)
                         nwList.Add(m);
                     mediaList = new ObservableCollection<Media>(nwList);
+                    Console.WriteLine("time to play artist");
+                    islinqRequest = false;
                 }
                 else if (medRequest == "Album")
                 {
@@ -290,6 +292,7 @@ namespace TestUserControl
                     foreach (Media m in stuff)
                         nwList.Add(m);
                     mediaList = new ObservableCollection<Media>(nwList);
+                    islinqRequest = false;
                 }
                 else if (medRequest == "Genre")
                 {
@@ -300,6 +303,7 @@ namespace TestUserControl
                     foreach (Media m in stuff)
                         nwList.Add(m);
                     mediaList = new ObservableCollection<Media>(nwList);
+                    islinqRequest = false;
                 }
 
             }

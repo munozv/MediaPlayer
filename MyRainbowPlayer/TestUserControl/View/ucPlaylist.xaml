@@ -76,7 +76,7 @@
             </TreeView>
 
         </Grid>
-        <DataGrid x:Name="Tablesheet" FontFamily="Calibri" Margin="200,20,0,0"  AlternatingRowBackground="AliceBlue" RowBackground="Azure"  ItemsSource="{Binding mediaList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  d:LayoutOverrides="GridBox" IsReadOnly="True" UseLayoutRounding="True">
+        <DataGrid x:Name="Tablesheet" FontFamily="Calibri" Margin="200,20,0,0" AlternatingRowBackground="AliceBlue" RowBackground="Azure"  ItemsSource="{Binding mediaList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  d:LayoutOverrides="GridBox" IsReadOnly="True" UseLayoutRounding="True">
         </DataGrid>
         <Grid x:Name="menu" Height="23" VerticalAlignment="Top">
             <Rectangle Stroke="Black" StrokeThickness="0" Margin="0,0,0,0" Height="22" VerticalAlignment="Top">
