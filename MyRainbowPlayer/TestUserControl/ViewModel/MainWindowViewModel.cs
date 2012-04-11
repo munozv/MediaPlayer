@@ -48,28 +48,20 @@ namespace TestUserControl
 
         public MainWindowViewModel()
         {
-            Mp3Tag.InitTags();
             MyIndexTab = 0;
             this.TimeViewModel = new ucTimeModel(db);
             this.PlaylistViewModel = new ucPlaylistModel(db);
+            
 
-           /* db.addSound("tamaman");
-            db.addSound("tapapa");
-            db.addSound("tachien");
-            db.addSound("tachat");
-            db.addSound("tafrere");
-            db.addPicture("toncul");
-            db.addPicture("toncul");
-            db.addPicture("et toncul");
-            dB.SaveSoundB();*/
-            db.LoadSoundB();
+            db.LoadB();
             this.PlaylistViewModel.MediaChanged += new EventHandler<MediaChangedEventArgs>(lib_MediaChanged);
         }
 
 
         public void aboutToClose(object sender, EventArgs e)
         {
-
+            Console.WriteLine("about to close");
+            db.SaveB();
         }
 
         void lib_MediaChanged(object sender, MediaChangedEventArgs e)

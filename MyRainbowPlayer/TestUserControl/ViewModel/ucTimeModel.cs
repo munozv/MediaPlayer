@@ -138,25 +138,8 @@ namespace TestUserControl
 
         private void myMedOpened(object sender, RoutedEventArgs e)
         {
-            Mp3Tag mp3 = new Mp3Tag(myMedElem.Source.ToString());
-
-            if (mp3.ReadData() == true)
-            {
-                db.addSound(myMedElem.Source.ToString());
+            if (mediatype != eMediaType.PICTURE)
                 MaxSlidValue = myMedElem.NaturalDuration.TimeSpan.TotalMilliseconds;
-            }
-            else
-            {
-                JPGTag jpg = new JPGTag(myMedElem.Source.ToString());
-
-                if (jpg.ReadData() == true)
-                    db.addPicture(myMedElem.Source.ToString());
-                else
-                {
-                    MaxSlidValue = myMedElem.NaturalDuration.TimeSpan.TotalMilliseconds;
-                    db.addVideo(myMedElem.Source.ToString());
-                }
-            }
         }
         private bool CanMediaOpened(object param)
         {
@@ -224,18 +207,53 @@ namespace TestUserControl
             myMedElem.Volume = s.Value;
         }
 
-
+        public eMediaType mediatype;
         public void loadPath(String path)
         {
             pause = true;
             TextPlay = "|>";
 
-            myMedElem.Source = new Uri(path);
+            try
+            {
+
+                TagLib.File tagfile = TagLib.File.Create(path);
+
+                String artist = tagfile.Tag.FirstArtist;
+                Console.WriteLine("artist is " + artist);
+                TagLib.Properties p = tagfile.Properties;
+                TagLib.MediaTypes mt = p.MediaTypes;
+                if (mt == TagLib.MediaTypes.Audio)
+                {
+                    mediatype = eMediaType.SOUND;
+                    db.addSound(path);
+                    myMedElem.Source = new Uri(path);
+                }
+                else if (mt == TagLib.MediaTypes.Photo)
+                {
+                    mediatype = eMediaType.PICTURE;
+                    db.addPicture(path);
+
+                    myMedElem.Source = new Uri(path);
+                    pause = false;
+                    TextPlay = "||";
+                    myMedElem.Play();
+                }
+                else if ((p.MediaTypes & TagLib.MediaTypes.Video) != TagLib.MediaTypes.None)
+                {
+                    mediatype = eMediaType.VIDEO;
+                    db.addVideo(path);
+                    myMedElem.Source = new Uri(path);
+                }
+            }
+            catch (TagLib.UnsupportedFormatException e)
+            {
+
+            }
         }
 
         private void doPlay(object param)
         {
-            if (myMedElem.IsLoaded == true)
+            if (myMedElem.IsLoaded == true && mediatype != eMediaType.PICTURE)
             {
                 if (pause == true)
                 {
@@ -260,7 +278,7 @@ namespace TestUserControl
 
         private void doStop(object param)
         {
-            if (myMedElem.IsLoaded == true)
+            if (myMedElem.IsLoaded == true && mediatype != eMediaType.PICTURE)
             {
                 myMedElem.Stop();
                 pause = true;

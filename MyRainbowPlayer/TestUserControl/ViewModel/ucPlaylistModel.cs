@@ -140,7 +140,6 @@ namespace TestUserControl
                 else if (header == "Musics")
                 {
                     Listdata = eMediaType.MUSIC;
-                    Console.WriteLine("I set music " + db.ListSound.Count);
                     mediaList = new ObservableCollection<Media>(db.ListSound);
                 }
                 else if (header == "Pictures")

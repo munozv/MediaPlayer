@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ArrayOfMedia xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Media>
+    <name>Maid with the Flaxen Hair</name>
+    <artist>Richard Stoltzman</artist>
+    <album>Fine Music, Vol. 1</album>
+    <genre>Classical</genre>
+    <path>C:\Users\munoz_v\Music\Maid with the Flaxen Hair.mp3</path>
+    <type>PICTURE</type>
+  </Media>
+  <Media>
+    <name>Sleep Away</name>
+    <artist>Bob Acri</artist>
+    <album>Bob Acri</album>
+    <genre>Jazz</genre>
+    <path>C:\Users\munoz_v\Music\Sleep Away.mp3</path>
+    <type>PICTURE</type>
+  </Media>
+  <Media>
+    <path>C:\Users\munoz_v\Music\Untitled.wma</path>
+    <type>PICTURE</type>
+  </Media>
+</ArrayOfMedia>

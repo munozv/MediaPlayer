@@ -28,48 +28,24 @@ namespace TestUserControl
         public void addCurrent(String path)
         {
             Media media = new Media();
-            if (path == currentPath)
-                return;
-            Mp3Tag tag = new Mp3Tag(path);
 
-            if (tag.ReadData())
-            {
-                Console.WriteLine("========= " + tag.FileName + " =========");
-                Console.WriteLine("Title:   " + tag.Title);
-                Console.WriteLine("Artist:  " + tag.Artist);
-                Console.WriteLine("Album:   " + tag.Album);
-                Console.WriteLine("Year:    " + tag.Year);
-                Console.WriteLine("Track:   " + tag.Track);
-                Console.WriteLine("Comment: " + tag.Comment);
-                Console.WriteLine("Genre:   " + tag.Genre);
-                Console.WriteLine("");
-                media.path = path;
-                media.name = tag.Title;
-                media.genre = tag.Genre;
-                media.artist = tag.Artist;
+            TagLib.File tagfile = TagLib.File.Create(path);
+
+            TagLib.Properties p = tagfile.Properties;
+            TagLib.MediaTypes mt = p.MediaTypes;
+            media.artist = tagfile.Tag.FirstArtist;
+            media.album = tagfile.Tag.Album;
+            media.name = tagfile.Tag.Title;
+            media.path = path;
+            media.genre = tagfile.Tag.FirstGenre;
+            media.copyright = tagfile.Tag.Copyright;
+
+            if (mt == TagLib.MediaTypes.Audio)
                 media.type = eMediaType.SOUND;
-                listCurrent.Add(media);
-            }
-            else
-            {
-                JPGTag tagjpg = new JPGTag(path);
-                if (tagjpg.ReadData() == true)
-                {
-                    media.path = path;
-                    media.artist = tagjpg.ImageArtist;
-                    media.copyright = tagjpg.Copyright;
-                    media.date = tagjpg.ImageDate;
-                    media.height = tagjpg.ImageHeight;
-                    media.width = tagjpg.ImageWidth;
-                    media.type = eMediaType.SOUND;
-                }
-                else
-                {
-                    media.path = path;
-                    media.name = path;
-                }
-            }
-
+            else if (mt == TagLib.MediaTypes.Photo)
+                media.type = eMediaType.PICTURE;
+            else if (mt == TagLib.MediaTypes.Video)
+                media.type = eMediaType.VIDEO;
             listCurrent.Add(media);
         }
         private List<Media> listCurrent;
@@ -131,43 +107,55 @@ namespace TestUserControl
             }
         }
 
-        public void SaveSoundB()
+        public void SaveB()
         {
-            XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
-            FileStream fs = new FileStream("songs.xml", FileMode.Create);
-
-            xse.Serialize(fs, ListSound);
+            savemedia("songs.xml", listSound);
+            savemedia("pictures.xml", ListPicture);
+            savemedia("videos.xml", ListVideo);
         }
 
-        public void LoadSoundB()
+        public void savemedia(String s, List<Media> list)
         {
+            XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
+            FileStream fs = new FileStream(s, FileMode.Create);
 
-            int i = 0;
+            Console.WriteLine("count is " + list.Count);
+            xse.Serialize(fs, list);
+        }
+
+        public void LoadB()
+        {
+            ListSound = Loadmedia("songs.xml", ListSound);
+            ListPicture = Loadmedia("pictures.xml", ListPicture);
+            ListVideo = Loadmedia("videos.xml", ListVideo);
+         }
+
+        public List<Media> Loadmedia(String s, List<Media> list)
+        {
             XmlSerializer xse = new XmlSerializer(typeof(List<Media>));
             string directory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            string filePath = Path.Combine(directory, "songs.xml");
+            string filePath = Path.Combine(directory, s);
 
             if (File.Exists(filePath) == true)
             {
-                FileStream fs = new FileStream("songs.xml", FileMode.Open);
+                FileStream fs = new FileStream(s, FileMode.Open);
                 if (fs.CanRead == true)
                 {
                     try
                     {
-                        listSound = (List<Media>)xse.Deserialize(fs);
+                        list = (List<Media>)xse.Deserialize(fs);
+                        return (list);
                     }
                     catch (Exception e)
-                    {
-                        return;
-                    }
-                    while (i != listSound.Count())
-                    {
-                        Console.WriteLine("album " + i + " " + listSound[i].path);
-                        i++;
+                    {                        
+
                     }
                 }
             }
+            return(new List<Media>());
         }
+
+
 
         public void addInLibrary(Media newMed)
         {
@@ -176,16 +164,28 @@ namespace TestUserControl
 
         public void addSound(String path)
         {
-            Media sound = new Media();
+            Media media = new Media();
 
-            Mp3Tag tag = new Mp3Tag(path);
-            Console.WriteLine("");
-            sound.path = path;
-            sound.name = tag.Title;
-            sound.genre = tag.Genre;
-            sound.artist = tag.Artist;
-            sound.type = eMediaType.SOUND;
-            listSound.Add(sound);
+            var stuff = from entry in listSound
+                        where (entry.path == path)
+                        select entry;
+
+            foreach (Media med in stuff)
+            {
+                return;
+            }
+            TagLib.File tagfile = TagLib.File.Create(path);
+
+            TagLib.Properties p = tagfile.Properties;
+            TagLib.MediaTypes mt = p.MediaTypes;
+            media.artist = tagfile.Tag.FirstArtist;
+            media.album = tagfile.Tag.Album;
+            media.name = tagfile.Tag.Title;
+            media.path = path;
+            media.genre = tagfile.Tag.FirstGenre;
+            media.copyright = tagfile.Tag.Copyright;
+
+            listSound.Add(media);
         }
         public void deleteSound(Media it)
         {
@@ -193,27 +193,55 @@ namespace TestUserControl
         }
         public void addVideo(String path)
         {
-            Media video = new Media();
+            Media media = new Media();
 
-            video.name = path;
+            var stuff = from entry in listVideo
+                        where (entry.path == path)
+                        select entry;
 
-            listVideo.Add(video);
+            foreach (Media med in stuff)
+            {
+                return;
+            }
+
+            TagLib.File tagfile = TagLib.File.Create(path);
+
+            TagLib.Properties p = tagfile.Properties;
+            TagLib.MediaTypes mt = p.MediaTypes;
+            media.artist = tagfile.Tag.FirstArtist;
+            media.album = tagfile.Tag.Album;
+            media.name = tagfile.Tag.Title;
+            media.path = path;
+            media.genre = tagfile.Tag.FirstGenre;
+            media.copyright = tagfile.Tag.Copyright;
+
+            listVideo.Add(media);
         }
         public void addPicture(String path)
         {
-            Media picture = new Media();
+            Media media = new Media();
 
-            JPGTag tag = new JPGTag(path);
-            Console.WriteLine("");
-            picture.path = path;
-            picture.artist = tag.ImageArtist;
-            picture.copyright = tag.Copyright;
-            picture.date = tag.ImageDate;
-            picture.height = tag.ImageHeight;
-            picture.width = tag.ImageWidth;
-            picture.type = eMediaType.SOUND;
+            var stuff = from entry in listVideo
+                        where (entry.path == path)
+                        select entry;
 
-            ListPicture.Add(picture);
+            foreach (Media med in stuff)
+            {
+                return;
+            }
+
+            TagLib.File tagfile = TagLib.File.Create(path);
+
+            TagLib.Properties p = tagfile.Properties;
+            TagLib.MediaTypes mt = p.MediaTypes;
+            media.artist = tagfile.Tag.FirstArtist;
+            media.album = tagfile.Tag.Album;
+            media.name = tagfile.Tag.Title;
+            media.path = path;
+            media.genre = tagfile.Tag.FirstGenre;
+            media.copyright = tagfile.Tag.Copyright;
+
+            ListPicture.Add(media);
         }
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ArrayOfMedia xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Media>
+    <path>C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg</path>
+    <copyright>© Corbis.  All Rights Reserved.</copyright>
+    <type>PICTURE</type>
+  </Media>
+</ArrayOfMedia>
