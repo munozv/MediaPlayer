@@ -64,10 +64,6 @@ namespace TestUserControl
         public void aboutToClose(object sender, EventArgs e)
         {
             db.SaveB();
-            XmlSerializer xse = new XmlSerializer(typeof(Dictionary<string, ObservableCollection<Media>>));
-            FileStream fs = new FileStream("playlists.xml", FileMode.Create);
-
-            xse.Serialize(fs, db.playlists);
         }
 
         void lib_MediaChanged(object sender, MediaChangedEventArgs e)

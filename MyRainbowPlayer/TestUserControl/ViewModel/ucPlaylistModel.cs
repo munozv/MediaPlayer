@@ -114,6 +114,7 @@ namespace TestUserControl
             foreach (KeyValuePair<String, ObservableCollection<Media>> entry in db.playlists)
             {
                 listdico.Add(entry.Key);
+                Console.WriteLine("coucou lol" + entry.Key);
             }
             OnPropertyChanged("listdico");
         }
@@ -165,6 +166,7 @@ namespace TestUserControl
                     mediaList = new ObservableCollection<Media>(r.Value);
                     return;
                 }
+                return;
            }
             else
             {
